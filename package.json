@@ -1,0 +1,37 @@
+{
+  "name": "beer-monorep",
+  "version": "1.0.0",
+  "description": "Beer Application for improving skills in brewing",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "server": "nodemon app.js",
+    "client": "",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jugosoft/beer-monorep.git"
+  },
+  "keywords": [
+    "beer",
+    "monorepository",
+    "js",
+    "react",
+    "express"
+  ],
+  "author": "me",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jugosoft/beer-monorep/issues"
+  },
+  "homepage": "https://github.com/jugosoft/beer-monorep#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "mongoose": "^6.1.6"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0",
+    "nodemon": "^2.0.15"
+  }
+}
