@@ -7,8 +7,7 @@ const App = () => {
   const routesRendered = routes(false);
     return (
       <Router>
-        <div className="container">
-          <h3>Frontend is loaded now.</h3>
+        <div className="container grey">
           { routesRendered }
         </div>
       </Router>
