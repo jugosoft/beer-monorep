@@ -1,8 +1,9 @@
 import React from "react";
+import "materialize-css";
 
 const Auth = () => {
     return(
-        <div>
+        <div className="row">
             <h1>TMP template Auth</h1>
         </div>
     );
