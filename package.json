@@ -4,10 +4,11 @@
   "description": "Beer Application for improving skills in brewing",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node app.js",
     "server": "nodemon app.js",
-    "client": "",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "test": ""
   },
   "repository": {
     "type": "git",
