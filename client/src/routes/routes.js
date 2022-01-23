@@ -22,8 +22,12 @@ const routes = (isAuthenticated) => {
     // For not authorized users
     return(
         <Routes>
+<<<<<<< HEAD
             <Route path='/auth' element={<Auth />} exact />
             <Route path="*" element={<Navigate to="/auth" />} />
+=======
+            <Route path='/' element={<Auth />} exact />
+>>>>>>> d1f913a6883721e3f594024d9d8d8d8ac92ea22a
         </Routes>
     );
 }

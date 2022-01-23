@@ -1,4 +1,5 @@
 import React from "react";
+<<<<<<< HEAD
 import "materialize-css";
 
 const Auth = () => {
@@ -28,6 +29,13 @@ const Auth = () => {
                 </div>
             </div>
             
+=======
+
+const Auth = () => {
+    return(
+        <div>
+            <h1>TMP template Auth</h1>
+>>>>>>> d1f913a6883721e3f594024d9d8d8d8ac92ea22a
         </div>
     );
 }
