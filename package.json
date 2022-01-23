@@ -28,7 +28,11 @@
   },
   "homepage": "https://github.com/jugosoft/beer-monorep#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "config": "^3.3.7",
     "express": "^4.17.2",
+    "express-validator": "^6.14.0",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.1.6"
   },
   "devDependencies": {

@@ -5,10 +5,10 @@ const app = express();
 
 const start = async () => {
     try {
-        const db = await mongo.connect(config.get('db.mongoURI'), {
-            useNewUrlParser: true, 
-            useUnifiedTopology: true
-        });
+        // const db = await mongo.connect(config.get('db.mongoURI'), {
+        //     useNewUrlParser: true, 
+        //     useUnifiedTopology: true
+        // });
         app.listen(config.get('port'), () => console.log(`Started at ${config.get('port')}`));
     } catch (error) {
         console.log('Something happened on the server');
@@ -16,5 +16,7 @@ const start = async () => {
         process.exit();
     }
 };
+
+app.use('/api/auth', require('./routes/auth.router'));
 
 start();
