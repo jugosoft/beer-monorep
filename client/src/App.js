@@ -4,7 +4,7 @@ import 'materialize-css';
 import routes from './routes/routes';
 
 const App = () => {
-  const routesRendered = routes(false);
+  const routesRendered = routes(true);
     return (
       <Router>
         <div className="container">

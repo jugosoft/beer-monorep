@@ -13,6 +13,7 @@ const routes = (isAuthenticated) => {
                 <Routes>
                     <Route path="/links" element={ <Links /> } exact />
                     <Route path="/details" element={ <Details /> } exact />
+                    <Route path="*" element={<Navigate to="/links" />} />
                 </Routes>
             </React.Fragment>
         );
