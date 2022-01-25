@@ -2,6 +2,9 @@ const express = require('express');
 const config = require('config');
 const mongo = require('mongoose');
 const app = express();
+const PORT = config.get('port');
+
+app.use('/api/auth', require('./routes/auth.router'));
 
 const start = async () => {
     try {
@@ -9,14 +12,13 @@ const start = async () => {
         //     useNewUrlParser: true, 
         //     useUnifiedTopology: true
         // });
-        app.listen(config.get('port'), () => console.log(`Started at ${config.get('port')}`));
+        app.listen(PORT, () => console.log(`Started at ${PORT}`));
     } catch (error) {
         console.log('Something happened on the server');
         console.log(error.message);
-        process.exit();
+        process.exit(1);
     }
 };
 
-app.use('/api/auth', require('./routes/auth.router'));
-
 start();
+

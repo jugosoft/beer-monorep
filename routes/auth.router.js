@@ -2,7 +2,6 @@ const {Router} = require('express')
 const {check, validationResult} = require('express-validator')
 const router = Router()
 
-
 // POST /api/auth/register
 router.post(
   '/register',
@@ -12,7 +11,6 @@ router.post(
       .isLength({ min: 6 })
   ],
   async (req, res) => {
-      console.log('incomming request');
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -20,11 +18,11 @@ router.post(
     }
 });
 
-
+// get zapros na registraciyu? ser'ezno??
 router.get(
   '/register',
   async (req, res) => {
     res.status(200).json({ message: 'Ok idi na xui' });
   });
 
-module.exports = router
+module.exports = router;
