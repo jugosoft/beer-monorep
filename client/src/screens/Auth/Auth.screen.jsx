@@ -1,8 +1,30 @@
-import React from "react";
-<<<<<<< HEAD
+import React, {useState}  from 'react';
+import useHttp from '../../hooks/http.hook';
+
 import "materialize-css";
 
 const Auth = () => {
+
+    const {loading, error, request} = useHttp();
+
+    const [form, setForm] = useState({
+        email: '',
+        password: ''
+    });
+
+    const changeHandler = (event) => {
+        setForm({...form, [event.target.name]: event.target.value});
+    }
+
+    const registerHandler = async () => {
+        try {
+            const data = await request('/api/auth/register', 'POST', {...form});
+            console.log(data);
+        } catch (error) {
+            
+        }
+    }
+
     return(
         <div className="row">
             <div className="col s6 offset-s3">
@@ -12,11 +34,11 @@ const Auth = () => {
                         <span className="card-title">Please Enter Your Credentials</span>
                         <div>
                             <div className="input-field ">
-                                <input id="email" type="text" className="validate" />
+                                <input id="email" type="text" className="validate" onChange={changeHandler} />
                                 <label htmlFor="email">Enter Login: </label>
                             </div>
                             <div className="input-field ">
-                                <input id="password" type="password" className="validate" />
+                                <input id="password" type="password" className="validate" onChange={changeHandler} />
                                 <label htmlFor="password">Enter Password: </label>
                             </div>
                         </div>
@@ -24,18 +46,11 @@ const Auth = () => {
                     <div className="card-action">
                         <button className="btn yellow darken-4">Login</button>
                         <span> </span>
-                        <button className="btn grey lighten-1 black-text">Register</button>
+                        <button className="btn grey lighten-1 black-text" onClick={registerHandler}>Register</button>
                     </div>
                 </div>
             </div>
             
-=======
-
-const Auth = () => {
-    return(
-        <div>
-            <h1>TMP template Auth</h1>
->>>>>>> d1f913a6883721e3f594024d9d8d8d8ac92ea22a
         </div>
     );
 }
