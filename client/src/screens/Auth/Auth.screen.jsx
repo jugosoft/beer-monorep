@@ -19,9 +19,17 @@ const Auth = () => {
     const registerHandler = async (event) => {
         event.preventDefault();
         try {
-            console.log({...form});
             const data = await request('/api/auth/register', 'POST', {...form});
             
+        } catch (error) {
+            
+        }
+    }
+
+    const loginHandler = async (event) => {
+        event.preventDefault();
+        try {
+            const data = await request('/api/auth/login', 'POST', {...form});
         } catch (error) {
             
         }
@@ -46,7 +54,7 @@ const Auth = () => {
                         </div>
                     </div>
                     <div className="card-action">
-                        <button className="btn yellow darken-4">Login</button>
+                        <button className="btn yellow darken-4" onClick={loginHandler}>Login</button>
                         <span> </span>
                         <button className="btn grey lighten-1 black-text" onClick={registerHandler}>Register</button>
                     </div>

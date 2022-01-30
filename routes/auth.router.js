@@ -2,6 +2,7 @@ const {Router} = require('express');
 const User = require('../models/User');
 const {check, validationResult} = require('express-validator');
 const bcryptjs = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const router = Router();
 
 // POST /api/auth/register
@@ -29,7 +30,7 @@ router.post(
       const candidate = await User.findOne({ email: email });
       
       if (candidate) {
-        return res.status(400).json({ message: 'USer already exists' });
+        return res.status(400).json({ message: 'User already exists' });
       }
 
       const hashedPassword = await bcryptjs.hash(password, 12);
@@ -53,5 +54,54 @@ router.get(
   async (req, res) => {
     res.status(200).json({ message: 'Ok idi na xui' });
   });
+
+router.post(
+  '/login',
+  [
+    check('email', 'email is requiered')
+      .isEmail()
+      .not().isEmpty(),
+    check('password', 'password is required')
+      .notEmpty() //xa-xa
+  ],
+  async (req, res) => { 
+    // console.log('vladimir ... mollodets');
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res.status(500).json({
+        errors: errors.array(),
+        message: 'Invalid login data'
+      });      
+    }
+
+    const {email, password} = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({message: 'user not found'});
+    }
+
+    const isHashedPasswordMatch = await bcryptjs.compare(password, user.password);
+
+    if (!isHashedPasswordMatch) {
+      console.log('passwd mismatch');
+      return res.status(500).json({
+        errors: errors.array(),
+        message: 'Invalid login data'
+      });   
+    }
+
+    const token = jwt.sign(
+      { userId: user.id },
+      'ebat',
+      { expiresIn: '1h' }
+    );
+    
+    res.status(200).json({ token, userId: user.id });
+  }
+);
 
 module.exports = router;

@@ -27,6 +27,8 @@ const useHttp = () => {
 
             setLoading(false);
 
+            return data;
+
         } catch (error) {
             setLoading(false);
             setError(error.message);
