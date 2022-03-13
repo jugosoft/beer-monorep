@@ -1,12 +1,12 @@
-import React, {useState}  from 'react';
+import React, { useContext, useState }  from 'react';
 import useHttp from '../../hooks/http.hook';
-
+import { AuthContext } from '../../context/AuthContext';
 import "materialize-css";
 
 const Auth = () => {
 
     const {loading, error, request} = useHttp();
-
+    const auth = useContext(AuthContext);
     const [form, setForm] = useState({
         email: '',
         password: ''
@@ -20,7 +20,7 @@ const Auth = () => {
         event.preventDefault();
         try {
             const data = await request('/api/auth/register', 'POST', {...form});
-            
+            auth.login(data.token, data.userId);
         } catch (error) {
             
         }
@@ -30,6 +30,7 @@ const Auth = () => {
         event.preventDefault();
         try {
             const data = await request('/api/auth/login', 'POST', {...form});
+            auth.login(data.token, data.userId)
         } catch (error) {
             
         }

@@ -4,7 +4,7 @@ import { Route, Routes, Navigate } from "react-router-dom";
 // Custom Imports
 import {Auth, Links, Details} from '../screens';
 
-const routes = (isAuthenticated) => {
+const seRoutes = (isAuthenticated) => {
 
     // For authorized
     if (isAuthenticated) {
@@ -28,4 +28,4 @@ const routes = (isAuthenticated) => {
     );
 }
 
-export default routes;
+export default seRoutes;
