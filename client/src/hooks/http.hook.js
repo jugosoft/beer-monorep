@@ -6,12 +6,16 @@ const useHttp = () => {
     const [error, setError] = useState(null);
 
     const request = useCallback(async (url, method = 'GET', body = null, headers = {}) => {
-
+        if (body) {
+            body = JSON.stringify(body);
+            headers['Content-Type'] = 'application/json';
+        }
+        
         try {
             setLoading(true);
             const response = await fetch(url, {
-                method: method,
-                body: body,
+                method: method, 
+                body: body, 
                 headers: headers
             });
 
@@ -22,6 +26,8 @@ const useHttp = () => {
             }
 
             setLoading(false);
+
+            return data;
 
         } catch (error) {
             setLoading(false);

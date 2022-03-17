@@ -1,25 +1,36 @@
-import React, {useState}  from 'react';
+import React, { useContext, useState }  from 'react';
 import useHttp from '../../hooks/http.hook';
-
+import { AuthContext } from '../../context/AuthContext';
 import "materialize-css";
 
 const Auth = () => {
 
     const {loading, error, request} = useHttp();
-
+    const auth = useContext(AuthContext);
     const [form, setForm] = useState({
         email: '',
         password: ''
     });
 
     const changeHandler = (event) => {
-        setForm({...form, [event.target.name]: event.target.value});
+        setForm({...form, [event.target.id]: event.target.value});
     }
 
-    const registerHandler = async () => {
+    const registerHandler = async (event) => {
+        event.preventDefault();
         try {
             const data = await request('/api/auth/register', 'POST', {...form});
-            console.log(data);
+            auth.login(data.token, data.userId);
+        } catch (error) {
+            
+        }
+    }
+
+    const loginHandler = async (event) => {
+        event.preventDefault();
+        try {
+            const data = await request('/api/auth/login', 'POST', {...form});
+            auth.login(data.token, data.userId)
         } catch (error) {
             
         }
@@ -44,7 +55,7 @@ const Auth = () => {
                         </div>
                     </div>
                     <div className="card-action">
-                        <button className="btn yellow darken-4">Login</button>
+                        <button className="btn yellow darken-4" onClick={loginHandler}>Login</button>
                         <span> </span>
                         <button className="btn grey lighten-1 black-text" onClick={registerHandler}>Register</button>
                     </div>

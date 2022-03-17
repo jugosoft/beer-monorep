@@ -1,6 +1,6 @@
 {
     "port": 5000,
     "db": {
-        "mongoURI": "mongodb+srv://dbadmin:qwerty123@beer-app.818aw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+        "mongoURI": "mongodb+srv://dbadmin:qwerty123@beer-app.818aw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority" 
     }
 }
