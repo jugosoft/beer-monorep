@@ -4,6 +4,7 @@ import 'materialize-css';
 import useRoutes from './routes/routes';
 import { useAuth } from './hooks/auth.hook';
 import { AuthContext } from './context/AuthContext';
+import { Navbar } from './components/NavBar/NavBar';
 
 const App = () => {
 
@@ -21,6 +22,7 @@ const App = () => {
     }}>
     <Router>
       <main>
+        { isAuthenticated && <Navbar /> }
         <div className="container">
           {routesRendered}
         </div>
