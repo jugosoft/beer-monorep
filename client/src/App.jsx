@@ -25,10 +25,8 @@ const App = () => {
         <header>
           { isAuthenticated && <NavBar /> }
         </header>
-        <main>
-          <div className="container">
-            {routesRendered}
-          </div>
+        <main className="container">
+          {routesRendered}
         </main>
         <footer className="page-footer orange">
           <Footer />

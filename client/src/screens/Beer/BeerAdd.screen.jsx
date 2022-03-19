@@ -4,10 +4,10 @@ import useHttp from '../../hooks/http.hook';
 
 const BeerAdd = () => {
 
-    const {loading, error, request} = useHttp();
+    const { loading, error, request } = useHttp();
     const navigate = useNavigate();
 
-    const { beerForm, setBeerForm } = useState({
+    const [beerForm, setBeerForm] = useState({
         beerName: '',
         beerType: '',
         beerColour: '',
@@ -23,6 +23,7 @@ const BeerAdd = () => {
 
         try {
             const response = await request('/api/beer/add', 'POST', {...beerForm});
+            console.log(response);
             if (response.isOk) {
                 navigate('/links');
             }
@@ -32,27 +33,27 @@ const BeerAdd = () => {
     }
 
     return( 
-        <form class="col s12">
-            <div class="row">
-                <div class="input-field col s6">
-                    <input id="beerName" type="text" class="validate" onChange={changeHandler} />
-                    <label for="beerName">Beer Name</label>
+        <form className="col s12">
+            <div className="row">
+                <div className="input-field col s6">
+                    <input id="beerName" type="text" className="validate" onChange={changeHandler} />
+                    <label htmlFor="beerName">Beer Name</label>
                 </div>
-                <div class="input-field col s6">
-                    <input id="beerType" type="text" class="validate" onChange={changeHandler}  />
-                    <label for="beerType">Beer Type</label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="input-field col s12">
-                    <input id="beerColour" type="text" class="validate" onChange={changeHandler} />
-                    <label for="beerColour">Beer Colour</label>
+                <div className="input-field col s6">
+                    <input id="beerType" type="text" className="validate" onChange={changeHandler}  />
+                    <label htmlFor="beerType">Beer Type</label>
                 </div>
             </div>
-            <div class="row">
+            <div className="row">
+                <div className="input-field col s12">
+                    <input id="beerColour" type="text" className="validate" onChange={changeHandler} />
+                    <label htmlFor="beerColour">Beer Colour</label>
+                </div>
+            </div>
+            <div className="row">
                 <div class="input-field col s12">
-                    <input id="beerAlcohol" type="text" class="validate" onChange={changeHandler} />
-                    <label for="beerAlcohol">Percentage of Alcohol</label>
+                    <input id="beerAlcohol" type="text" className="validate" onChange={changeHandler} />
+                    <label htmlFor="beerAlcohol">Percentage of Alcohol</label>
                 </div>
             </div>
             <button className="btn yellow darken-4" onClick={createHandler}>CraftBeer</button>
