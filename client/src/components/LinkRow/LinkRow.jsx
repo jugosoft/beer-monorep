@@ -1,5 +1,4 @@
 import React from 'react';
-import 'materialize-css';
 import 'material-icons';
 
 const LinkRow = ({active}) => {

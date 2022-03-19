@@ -1,6 +1,5 @@
 import React from "react";
 import LinkRow from '../../components/LinkRow/LinkRow';
-import "materialize-css";
 
 const Links = () => {
     return(
