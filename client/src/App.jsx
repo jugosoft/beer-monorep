@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import 'materialize-css';
 import useRoutes from './routes/routes';
 import { useAuth } from './hooks/auth.hook';
@@ -18,7 +18,7 @@ const App = () => {
 
   return (
     <body>
-      <Router>
+      <BrowserRouter>
         <AuthContext.Provider value={{
           token, login, logout, userId, isAuthenticated
         }}>
@@ -34,7 +34,7 @@ const App = () => {
           <Footer />
         </footer>
         </AuthContext.Provider>
-      </Router>
+      </BrowserRouter>
     </body>
   );
 }
