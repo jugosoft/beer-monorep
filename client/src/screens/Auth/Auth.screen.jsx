@@ -12,11 +12,11 @@ const Auth = () => {
         password: ''
     });
 
-    const changeHandler = (event) => {
+    const changeHandler = event => {
         setForm({...form, [event.target.id]: event.target.value});
     }
 
-    const registerHandler = async (event) => {
+    const registerHandler = async event => {
         event.preventDefault();
         try {
             const data = await request('/api/auth/register', 'POST', {...form});

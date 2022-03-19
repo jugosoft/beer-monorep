@@ -17,10 +17,10 @@ const NavBar = () => {
       <div className="nav-wrapper blue darken-1" style={{ padding: '0 2rem' }}>
         <span className="brand-logo">Beer App</span>
         <ul className="right hide-on-med-and-down">
-          <li><NavLink to="/create">Создать</NavLink></li>
-          <li><NavLink to="/links">Ссылки</NavLink></li>
+          <li><NavLink to="/beeradd">Craft Beer</NavLink></li>
+          <li><NavLink to="/links">Links</NavLink></li>
           <li><NavLink to="/info">Info</NavLink></li>
-          <li><a href="/" onClick={logoutHandler}>Выйти</a></li>
+          <li><a href="/" onClick={logoutHandler}>Logout</a></li>
         </ul>
       </div>
     </nav>
