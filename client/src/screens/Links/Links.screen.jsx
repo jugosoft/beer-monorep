@@ -9,7 +9,9 @@ const Links = () => {
                 <h1>TBeer Links Screen</h1>
             </div>
             <div className="row">
-                <NavLink to='/beeradd' class="waves-effect waves-light btn-large"><i class="material-icons right">cloud</i>Craft Beer</NavLink>
+                <NavLink to='/beeradd'>
+                    <button className="waves-effect waves-light btn">Craft Beer</button>
+                </NavLink>
             </div>
             <ul className="collection">
                 <LinkRow active = {true}/>
