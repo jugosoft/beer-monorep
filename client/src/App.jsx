@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter } from "react-router-dom";
 import 'materialize-css';
 import useRoutes from './routes/routes';
@@ -14,24 +14,26 @@ const App = () => {
 
   if (!ready) {
     return <div>Loading</div>
-  }
+  } 
+
+  M.toast({html: 'Application is loaded!'})
 
   return (
     <body>
       <BrowserRouter>
-        <AuthContext.Provider value={{
-          token, login, logout, userId, isAuthenticated
-        }}>
-        <header>
-          { isAuthenticated && <NavBar /> }
-        </header>
-        <main className="container">
-          {routesRendered}
-        </main>
-        <footer className="page-footer orange">
-          <Footer />
-        </footer>
-        </AuthContext.Provider>
+          <AuthContext.Provider value={{
+            token, login, logout, userId, isAuthenticated
+          }}>
+          <header>
+            { isAuthenticated && <NavBar /> }
+          </header>
+          <main className="container">
+            { routesRendered }
+          </main>
+          <footer className="page-footer orange">
+            <Footer />
+          </footer>
+          </AuthContext.Provider>
       </BrowserRouter>
     </body>
   );

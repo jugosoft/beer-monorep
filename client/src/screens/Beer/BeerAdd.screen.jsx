@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useHttp from '../../hooks/http.hook';
 
@@ -24,11 +24,14 @@ const BeerAdd = () => {
         try {
             const response = await request('/api/beer/add', 'POST', {...beerForm});
             console.log(response);
-            if (response.isOk) {
-                navigate('/links');
-            }
-        } catch {
 
+            
+            M.toast({html: response.message})
+            
+            navigate('/links');
+            
+        } catch (error) {
+            console.log(error);
         }
     }
 
