@@ -40,7 +40,14 @@ const Links = () => {
             { loading && <div>Loading</div> }
 
             <ul className="collection">
-                { beers.map(beer => <LinkRow />)}
+                { 
+                    beers.map(beer => <LinkRow 
+                        key={beer._id}
+                        name={beer.beerName}
+                        type={beer.beerType}
+                        colour={beer.beerColour}
+                        alcohol={beer.beerAlcohol} />
+                )}
             </ul>
         </div>
     );

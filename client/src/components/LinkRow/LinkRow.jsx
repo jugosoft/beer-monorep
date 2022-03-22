@@ -1,17 +1,16 @@
 import React from 'react';
 import 'material-icons';
 
-const LinkRow = ({active}) => {
-    const classNames = ['collection-item'];
-    if (active) {
-        classNames.push('active');
-    }
+const LinkRow = (props) => {
+
+    const { name, type, colour, alcohol } = props;
+
     return(
         <li class="collection-item avatar">
             <i class="material-icons circle red">border_color</i>
-            <span class="title"><b>Title</b></span>
-            <p>First Line</p>
-            <p>Second Line</p>
+            <span class="title"><b>{ name }</b>, type is { type }</span>
+            <p>Alcohol={ alcohol }%</p>
+            <p>Its colour is { colour }</p>
             <a href="#!" class="secondary-content">
                 <i class="material-icons">grade</i>
             </a>
