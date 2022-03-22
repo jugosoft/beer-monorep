@@ -22,7 +22,7 @@ const BeerAdd = () => {
         event.preventDefault();
 
         try {
-            const response = await request('/api/beer/add', 'POST', {...beerForm});
+            const response = await request('/api/beer/post', 'POST', {...beerForm});
             console.log(response);
 
             
