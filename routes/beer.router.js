@@ -4,9 +4,30 @@ const {check, validationResult} = require('express-validator');
 
 const router = Router();
 
-// POST /api/beer/add
+// POST /api/beer/get
+router.get(
+  '/get',
+  [],
+  async (req, res) => {
+
+    try {
+      const beers = await Beer.find();
+      if (!beers) {
+        res.status(400).json({ message: 'Beers not found' });
+      }
+    
+      res.status(200).json({ message: 'Beers are loaded', beers });
+
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Internal server Error' });
+  }
+
+});
+
+// POST /api/beer/post
 router.post(
-  '/add',
+  '/post',
   [
     check('beerName', 'Beer Name is requierd').notEmpty()
   ],
