@@ -11,13 +11,14 @@ router.get(
   async (req, res) => {
 
     try {
+
       const perPage = 10;
       const page = req.query.page;
 
       const beers = await Beer.find()
         .limit(perPage)
         .skip(perPage * page);
-        
+
       if (!beers) {
         res.status(400).json({ message: 'Beers not found' });
       }

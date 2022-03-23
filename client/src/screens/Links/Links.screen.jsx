@@ -26,7 +26,7 @@ const Links = () => {
             M.toast({html: data.message});
         } catch (e) {}
       }, [request, page]);
-    
+
       useEffect(() => {
         fetchData();
       }, [fetchData]);
