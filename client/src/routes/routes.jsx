@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes, Navigate } from "react-router-dom";
 
 // Custom Imports
-import {Auth, Links, Details, Info, BeerAdd} from '../screens';
+import {Auth, Links, Details, Info, BeerAdd, DefaultLanding } from '../screens';
 
 const seRoutes = (isAuthenticated) => {
 
@@ -23,9 +23,10 @@ const seRoutes = (isAuthenticated) => {
 
     // For not authorized users
     return(
-        <Routes>
+        <Routes> 
+            <Route path='/default' element={<DefaultLanding />} exact />
             <Route path='/auth' element={<Auth />} exact />
-            <Route path="*" element={<Navigate to="/auth" />} />
+            <Route path="*" element={<Navigate to="/default" />} />
         </Routes>
     );
 }
