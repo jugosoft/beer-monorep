@@ -14,26 +14,26 @@ const App = () => {
 
   if (!ready) {
     return <div>Loading</div>
-  } 
+  }
 
-  M.toast({html: 'Application is loaded!'})
+  M.toast({ html: 'Application is loaded!' })
 
   return (
     <body>
       <BrowserRouter>
-          <AuthContext.Provider value={{
-            token, login, logout, userId, isAuthenticated
-          }}>
+        <AuthContext.Provider value={{
+          token, login, logout, userId, isAuthenticated
+        }}>
           <header>
-            { isAuthenticated && <NavBar /> }
+            <NavBar />
           </header>
           <main className="container">
-            { routesRendered }
+            {routesRendered}
           </main>
           <footer className="page-footer orange">
             <Footer />
           </footer>
-          </AuthContext.Provider>
+        </AuthContext.Provider>
       </BrowserRouter>
     </body>
   );

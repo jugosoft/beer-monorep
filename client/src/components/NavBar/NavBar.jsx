@@ -1,5 +1,5 @@
-import React, {useContext} from 'react';
-import {NavLink, useNavigate, } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { NavLink, useNavigate, } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthContext';
 
 const NavBar = () => {
@@ -16,12 +16,17 @@ const NavBar = () => {
     <nav>
       <div className="nav-wrapper blue darken-1" style={{ padding: '0 2rem' }}>
         <span className="brand-logo">Beer App</span>
-        <ul className="right hide-on-med-and-down">
-          <li><NavLink to="/beeradd">Craft Beer</NavLink></li>
-          <li><NavLink to="/links">Links</NavLink></li>
-          <li><NavLink to="/info">Info</NavLink></li>
-          <li><a href="/" onClick={logoutHandler}>Logout</a></li>
-        </ul>
+        {
+          !!auth.token &&
+          <ul className="right hide-on-med-and-down">
+
+
+            <li><NavLink to="/beeradd">Craft Beer</NavLink></li>
+            <li><NavLink to="/links">Links</NavLink></li>
+            <li><NavLink to="/info">Info</NavLink></li>
+            <li><a href="/" onClick={logoutHandler}>Logout</a></li>
+          </ul>
+        }
       </div>
     </nav>
   )
