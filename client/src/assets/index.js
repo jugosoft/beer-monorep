@@ -7,6 +7,12 @@ const IMAGES = {
         certified2: require('./certified2.jpg'),
         burger: require('./burger.jpg'),
         logo: require('./logo.png')
+    },
+    theme: {
+        loader: {
+            black: require('./black.gif'),
+            white: require('./white.gif')
+        }
     }
 };
 
