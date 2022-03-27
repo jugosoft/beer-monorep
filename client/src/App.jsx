@@ -4,7 +4,7 @@ import 'materialize-css';
 import useRoutes from './routes/routes';
 import { useAuth } from './hooks/auth.hook';
 import { AuthContext } from './context/AuthContext';
-import { NavBar, Footer } from './components';
+import { NavBar, Footer, Loader } from './components';
 
 const App = () => {
 
@@ -13,7 +13,7 @@ const App = () => {
   const routesRendered = useRoutes(isAuthenticated);
 
   if (!ready) {
-    return <div>Loading</div>
+    return <Loader />
   }
 
   M.toast({ html: 'Application is loaded!' })

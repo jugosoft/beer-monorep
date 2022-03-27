@@ -1,26 +1,23 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import IMAGES from '../../assets';
-import NavBar from '../../components/NavBar/NavBar';
 
 const DefaultLanding = (props) => {
   return (
     <>
       <br />
       <div id="index-banner" class="row parallax-container">
-        <div class="section no-pad-bot">
-          <div class="container">
-            <br />
-            <h1 class="header center">BeerApp.io</h1>
-            <div class="row center">
-              <h5 class="col s12 light">Don't drink too much without a Reason.</h5>
-            </div>
-            <div class="row center">
-              <a href="#contact" class="btn-large waves-effect waves-light cyan darken-4 modal-trigger">Contact Us</a>
-            </div>
-            <div class="row center">
-              <NavLink className="btn-large green darken-4" to="/auth">Join Us</NavLink>
-            </div>
+        <div class="container">
+          <br />
+          <h1 class="header center">BeerApp.io</h1>
+          <div class="row center">
+            <h5 class="col s12 light">Don't drink too much without a Reason.</h5>
+          </div>
+          <div class="row center">
+            <a href="#contact" class="btn-large waves-effect waves-light cyan darken-4 modal-trigger">Contact Us</a>
+          </div>
+          <div class="row center">
+            <NavLink className="btn-large green darken-4" to="/auth">Join Us</NavLink>
           </div>
         </div>
         <div class="parallax">
@@ -29,52 +26,43 @@ const DefaultLanding = (props) => {
       </div>
 
       <div className="row">
-        <div class="section">
-          <div class="row" id="about">
-            <div class="col s12 m6">
-              <img class="responsive-img right circle z-depth-1" src={IMAGES.landing.party} style={{ height: '400px', width: '400px' }} alt="Loading Image" />
-            </div>
-            <div class="col s12 m6 about-text ">
-              <div class="icon-block">
-                <h5><b>Oh... What is Beer?</b></h5>
-                <p>Пи́в0 — слабоалкогольный напиток, получаемый спиртовым брожением солодового сусла с помощью
-                  пивных дрожжей, обычно с добавлением хмеля. Содержание этилового спирта в большинстве сортов
-                  пива около 3,0—6,0 % об., сухих веществ 7—10 %, углекислого газа 0,48—1,0 %. </p>
-                <ol>
-                  <li class="about">Vo-pervyx, ya ne buhayu.</li>
-                  <li class="about">Vo-vtoryx, ya syuda tebya ne zval.</li>
-                </ol>
-              </div>
-            </div>
+        <div class="col s12 m6">
+          <img class="responsive-img right circle z-depth-1" src={IMAGES.landing.party} style={{ height: '400px', width: '400px' }} alt="Loading Image" />
+        </div>
+        <div class="col s12 m6 about-text ">
+          <div class="icon-block">
+            <h5><b>Oh... What is Beer?</b></h5>
+            <p>Пи́в0 — слабоалкогольный напиток, получаемый спиртовым брожением солодового сусла с помощью
+              пивных дрожжей, обычно с добавлением хмеля. Содержание этилового спирта в большинстве сортов
+              пива около 3,0—6,0 % об., сухих веществ 7—10 %, углекислого газа 0,48—1,0 %. </p>
+            <ol>
+              <li class="about">Vo-pervyx, ya ne buhayu.</li>
+              <li class="about">Vo-vtoryx, ya syuda tebya ne zval.</li>
+            </ol>
           </div>
         </div>
       </div>
 
       <div className="row">
-        <div class="section">
-          <div class="row" id="about">
-            <div class="col s12 m6 about-text">
-              <div class="icon-block">
-                <h5 class="center">About</h5>
-                <p class="about light">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-                  tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                  quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                  fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                  culpa qui officia deserunt mollit anim id est laborum.
-                </p>
-              </div>
-            </div>
-            <div class="col s12 m6">
-              <img className="responsive-img left circle" src={IMAGES.landing.guy} style={{ height: '400px', width: '400px' }} alt="Loading Image" />
-            </div>
+        <div class="col s12 m6 about-text">
+          <div class="icon-block">
+            <h5 class="center">About</h5>
+            <p class="about light">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
+              fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+              culpa qui officia deserunt mollit anim id est laborum.
+            </p>
           </div>
+        </div>
+        <div class="col s12 m6">
+          <img className="responsive-img left circle" src={IMAGES.landing.guy} style={{ height: '400px', width: '400px' }} alt="Loading Image" />
         </div>
       </div>
 
       <div class="row">
-
         <div class="col s12 m6">
           <div class="card sticky-action">
             <div class="card-image waves-effect waves-block waves-light">
