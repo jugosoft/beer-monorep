@@ -1,27 +1,15 @@
-const express = require('express');
-const config = require('config');
-const mongo = require('mongoose');
-const cors = require('cors');
-const app = express();
-const PORT = config.get('port');
+const cluster = require('cluster');
 
-app.use(express.json());
-app.use('/api/auth', require('./routes/auth.router'));
-app.use('/api/beer', require('./routes/beer.router'));
+const start = async() => {
 
-const start = async () => {
-    try {
-        const db = await mongo.connect(config.get('db.mongoURI'), {
-            useNewUrlParser: true, 
-            useUnifiedTopology: true
-        });
-        app.listen(PORT, () => console.log(`Started at ${PORT}`));
-    } catch (error) {
-        console.log('Something happened on the server');
-        console.log(error.message);
-        process.exit(1);
+    if (cluster.isMaster) {
+        const master = await require('./master');
+        console.log(`Started Master process ${master.pid}`);
+        return;
     }
-};
+
+    const worker = await require('./worker');
+    console.log(`Started Worker process ${worker.pid}`);
+}
 
 start();
-
