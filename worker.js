@@ -7,6 +7,7 @@ const PORT = config.get('port');
 app.use(express.json());
 app.use('/api/auth', require('./routes/auth.router'));
 app.use('/api/beer', require('./routes/beer.router'));
+app.use('/api/blog', require('./routes/blog.router'));
 
 const start = async() => {
     try {
