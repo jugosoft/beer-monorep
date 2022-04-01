@@ -19,23 +19,21 @@ const App = () => {
   M.toast({ html: 'Application is loaded!' })
 
   return (
-    <body>
-      <BrowserRouter>
-        <AuthContext.Provider value={{
-          token, login, logout, userId, isAuthenticated
-        }}>
-          <header>
-            <NavBar />
-          </header>
-          <main className="container">
-            {routesRendered}
-          </main>
-          <footer className="page-footer orange">
-            <Footer />
-          </footer>
-        </AuthContext.Provider>
-      </BrowserRouter>
-    </body>
+    <BrowserRouter>
+      <AuthContext.Provider value={{
+        token, login, logout, userId, isAuthenticated
+      }}>
+        <header>
+          <NavBar />
+        </header>
+        <main className="container">
+          {routesRendered}
+        </main>
+        <footer className="page-footer orange">
+          <Footer />
+        </footer>
+      </AuthContext.Provider>
+    </BrowserRouter>
   );
 }
 
