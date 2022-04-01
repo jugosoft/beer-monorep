@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Routes, Navigate } from "react-router-dom";
 
 // Custom Imports
-import {Auth, Links, Details, Info, BeerAdd, DefaultLanding } from '../screens';
+import {Auth, Links, Details, Info, BeerAdd, DefaultLanding, BlogAdd } from '../screens';
 
 const seRoutes = (isAuthenticated) => {
 
@@ -15,6 +15,7 @@ const seRoutes = (isAuthenticated) => {
                     <Route path="/details" element={ <Details /> } exact />
                     <Route path="/info" element={ <Info /> } exact />
                     <Route path="/beeradd" element={ <BeerAdd /> } exact />
+                    <Route path="/blogadd" element={ <BlogAdd /> } exact />
                     <Route path="*" element={<Navigate to="/links" />} />
                 </Routes>
             </React.Fragment>

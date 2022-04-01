@@ -19,11 +19,10 @@ const NavBar = () => {
         {
           !!auth.token &&
           <ul className="right hide-on-med-and-down">
-
-
             <li><NavLink to="/beeradd">Craft Beer</NavLink></li>
             <li><NavLink to="/links">Links</NavLink></li>
             <li><NavLink to="/info">Info</NavLink></li>
+            <li><NavLink to="/blogadd">Blog</NavLink></li>
             <li><a href="/" onClick={logoutHandler}>Logout</a></li>
           </ul>
         }
