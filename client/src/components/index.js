@@ -9,3 +9,6 @@ from './NavBar/NavBar';
 
 export { default as Loader }
 from './Loader/Loader';
+
+export { default as TextArea }
+from './TextArea/TextArea';
