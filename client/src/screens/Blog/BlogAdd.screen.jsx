@@ -1,6 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { TextArea } from '../../components';
 
 const BlogAdd = (props) => {
+
+    const defaultState = {
+        id: 0,
+        icon: 'mode_edit',
+        label: 'Posts content',
+        value: '',
+        readonly: false
+    };
+
+    const [abstracts, setAbstracts] = useState([{ ...defaultState }]);
+
+    const handleNew = (event) => {
+        setAbstracts([...abstracts, { ...defaultState, id: abstracts.length }]);
+    }   
+
+    const handleChange = (id) => (event) => {
+
+        setAbstracts(prev => {
+            let newData = [...prev];
+            newData[id].value = event.target.value;
+            return [
+                ...newData
+            ];
+        });
+    }
+
     return (
         <form>
             <div className="row">
@@ -15,25 +42,35 @@ const BlogAdd = (props) => {
                     <label htmlFor="blogTitle">Title</label>
                 </div>
             </div>
-            <div className="row">
-                <div className="col s12 m6 offset-m3">
-                    <i className="material-icons prefix">mode_edit</i>
-                    <label for="icon_prefix">Post's content</label>
-                    <textarea id="icon_prefix" class="materialize-textarea"></textarea>
-                </div>
-            </div>
+            {abstracts.map((abstract, index) => {
+                return (
+                    <div className="row">
+                        <div className="col s12 m6 offset-m3">
+                            <TextArea
+                                key={index} //tmp solution
+                                icon={abstract.icon}
+                                label={abstract.label}
+                                value={abstract.value}
+                                handleChange={handleChange(index)}
+                                readonly={false} />
+                        </div>
+                    </div>
+                );
+            })}
+
+
             <div className="row">
                 <div className="col s12 m3 offset-m3">
-                    <a class="waves-effect waves-teal btn-flat">Add New Abstract</a>
+                    <a class="waves-effect waves-teal btn-flat" onClick={handleNew}>Add New Abstract</a>
                 </div>
                 <div className="col s12 m3 right-align">
-                    <a class="waves-effect waves-teal btn-flat">Post Image</a>
+                    <a class="waves-effect waves-teal btn-flat" onClick={() => alert('add new')}>Post Image</a>
                 </div>
             </div>
             <div className="row">
                 <div className="col s6 m3 offset-m3">
-                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                        <i class="material-icons right">send</i>
+                    <button className="btn waves-effect waves-light" type="submit" name="action">Submit
+                        <i className="material-icons right">send</i>
                     </button>
                 </div>
             </div>
