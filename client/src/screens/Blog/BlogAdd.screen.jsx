@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { TextArea } from '../../components';
+import { Gallery, TextArea } from '../../components';
 
 const BlogAdd = (props) => {
 
@@ -8,20 +8,30 @@ const BlogAdd = (props) => {
         icon: 'mode_edit',
         label: 'Posts content',
         value: '',
-        readonly: false
+        readonly: false,
+        images: []
     };
 
     const [abstracts, setAbstracts] = useState([{ ...defaultState }]);
 
     const handleNew = (event) => {
         setAbstracts([...abstracts, { ...defaultState, id: abstracts.length }]);
-    }   
+    }
 
     const handleChange = (id) => (event) => {
-
         setAbstracts(prev => {
             let newData = [...prev];
             newData[id].value = event.target.value;
+            return [
+                ...newData
+            ];
+        });
+    }
+
+    const handleNewImage = (id) => (event) => {
+        setAbstracts(prev => {
+            let newData = [...prev];
+            newData[id].images.push(URL.createObjectURL(event.target.files[0]));
             return [
                 ...newData
             ];
@@ -44,17 +54,25 @@ const BlogAdd = (props) => {
             </div>
             {abstracts.map((abstract, index) => {
                 return (
-                    <div className="row">
-                        <div className="col s12 m6 offset-m3">
-                            <TextArea
-                                key={index} //tmp solution
-                                icon={abstract.icon}
-                                label={abstract.label}
-                                value={abstract.value}
-                                handleChange={handleChange(index)}
-                                readonly={false} />
+                    <>
+                        <div className="row">
+                            <div className="col s12 m6 offset-m3">
+                                <TextArea
+                                    key={index} //tmp solution
+                                    icon={abstract.icon}
+                                    label={abstract.label}
+                                    value={abstract.value}
+                                    handleChange={handleChange(index)}
+                                    readonly={false} />
+                            </div>
                         </div>
-                    </div>
+                        <div className="row">
+                            <div className="col s12 m6 offset-m3">
+                                <Gallery 
+                                    images={abstract.images} />
+                            </div>
+                        </div>
+                    </>
                 );
             })}
 
@@ -64,7 +82,7 @@ const BlogAdd = (props) => {
                     <a class="waves-effect waves-teal btn-flat" onClick={handleNew}>Add New Abstract</a>
                 </div>
                 <div className="col s12 m3 right-align">
-                    <a class="waves-effect waves-teal btn-flat" onClick={() => alert('add new')}>Post Image</a>
+                    <input type="file" class="waves-effect waves-teal btn-flat" onChange={handleNewImage(abstracts.length - 1)} />
                 </div>
             </div>
             <div className="row">
