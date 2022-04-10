@@ -2,10 +2,15 @@ const { Schema, model } = require("mongoose");
 
 const PostSchema = new Schema({
     title: { type: String, required: true, unique: true },
-    desc: { type: String, required: true },
-    photo: { type: String, required: false },
-    email: { type: String, required: true },
-    categories: { type: Array, required: false },
+    abstracts: [{
+        id: 0,
+        value: { type: String },
+        images: [{
+            data: Buffer,
+            contentType: String
+        }]
+    }],
+    categories: [{ type: String, required: false }],
 }, {
     timestamps: true
 });

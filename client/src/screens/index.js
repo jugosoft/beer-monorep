@@ -12,3 +12,5 @@ export { default as DefaultLanding }
 from './DefaultLanding/DefaultLanding.screen.jsx';
 export { default as BlogAdd }
 from './Blog/BlogAdd.screen.jsx';
+export { default as BlogsView }
+from './Blog/BlogsView.screen.jsx';

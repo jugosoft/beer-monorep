@@ -24,14 +24,22 @@ router.get('/get', async(req, res) => {
     // to add categories
     try {
 
+        const perPage = 10;
+        const page = req.query.page;
+        console.log(req.query.page);
+
         let blogs;
         if (username) {
 
-            blogs = await Blog.find({ username });
+            blogs = await Blog.find({ username })
+                .limit(perPage)
+                .skip(perPage * page);
 
         } else {
 
-            blogs = await Blog.find();
+            blogs = await Blog.find()
+                // .limit(perPage)
+                // .skip(perPage * page);
 
         }
 
@@ -58,6 +66,7 @@ router.post(
         } catch (error) {
             return res.status(500).json({ message: 'Internal server Error' });
         }
+
     });
 
 // UPDATE /api/blog/put

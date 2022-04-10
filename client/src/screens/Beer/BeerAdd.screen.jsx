@@ -25,8 +25,7 @@ const BeerAdd = () => {
             const response = await request('/api/beer/post', 'POST', { ...beerForm });
             console.log(response);
 
-
-            M.toast({ html: response.message })
+            M.toast({ html: response.message });
 
             navigate('/links');
 

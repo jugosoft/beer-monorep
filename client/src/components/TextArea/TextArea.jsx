@@ -2,17 +2,12 @@ import React, { useState } from 'react';
 
 const TextArea = (props) => {
 
-    const { icon, label, value, handleChange, readonly } = props;
-
-    // const handleChange = (event) => {
-    //     setState(event.target.value);
-    // }
+    const { icon, placeholder, value, handleChange, readonly } = props;
 
     return (
         <>  
             <i className="material-icons prefix">{icon}</i>
-            <label>{label}</label>
-            <textarea className="materialize-textarea" onChange={handleChange} readOnly={readonly} value={value} />
+            <textarea placeholder={placeholder} className="materialize-textarea" onChange={handleChange} readOnly={readonly} value={value} />
         </>
     );
 }
