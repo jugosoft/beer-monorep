@@ -15,3 +15,9 @@ from './TextArea/TextArea';
 
 export { default as Gallery }
 from './Gallery/Gallery';
+
+export { default as HashTag }
+from './HashTag/HashTag';
+
+export { default as BlogRow }
+from './Blog/BlogRow/BlogRow';

@@ -38,7 +38,7 @@ const Auth = () => {
 
     return(
         <div className="row">
-            <div className="col s6 offset-s3">
+            <div className="col s12 m6 offset-m3">
                 <h1>Authentication</h1>
                 <div className="card grey darken-1">
                     <div className="card-content white-text">

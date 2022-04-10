@@ -15,7 +15,7 @@ const start = async() => {
             useNewUrlParser: true,
             useUnifiedTopology: true
         });
-        app.listen(PORT, () => true);
+        app.listen(PORT, '192.168.1.9', () => true);
     } catch (error) {
         console.log(`Something happened on the server. PID is ${process.pid}`);
         console.log(error.message);

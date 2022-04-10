@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const Gallery = (props) => {
 
-    const { images } = props;
+    const { images, handleRemoveImage, abstractId } = props;
 
     useEffect(() => {
         let elems = document.querySelectorAll(".slider");
@@ -18,8 +18,15 @@ const Gallery = (props) => {
             <ul className="slides">
                 {images.map((image) => {
                     return (
-                        <li>
-                            <img src={image} />
+                        <li key={image.id}>
+                            <img src={image.file} />
+                            <div className="caption right-align">
+                                {!!handleRemoveImage &&
+                                    <a className="btn" onClick={handleRemoveImage(image.id, abstractId)}>
+                                        <i className="material-icons">remove_circle</i>
+                                    </a>
+                                }
+                            </div>
                         </li>
                     );
                 })}
