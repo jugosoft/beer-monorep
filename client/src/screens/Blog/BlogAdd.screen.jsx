@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { Gallery, HashTag, TextArea } from '../../components';
-import useHttp from '../../hooks/http.hook';
-import KEYS from '../../constants/keys';
+import { Gallery, Category, TextArea } from '../../components';
+import { useHttp } from '../../hooks';
+import { KEYS } from '../../constants';
 import { useNavigate } from 'react-router-dom';
 
 const BlogAdd = () => {
@@ -108,7 +108,7 @@ const BlogAdd = () => {
                 <div className="input-field col s12 m6 offset-m3">
                     {post.categories.map((category, index) => {
                         return (
-                            <HashTag
+                            <Category
                                 key={index}
                                 tag={category}
                                 removeTag={handleRemoveTag(index)} />

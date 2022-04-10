@@ -1,23 +1,20 @@
 import React from 'react';
 import { Route, Routes, Navigate } from "react-router-dom";
+import {Auth, BeersView, BeerAdd, DefaultLanding, BlogsView, BlogAdd, Info } from '../screens';
 
-// Custom Imports
-import {Auth, Links, Details, Info, BeerAdd, DefaultLanding, BlogAdd, BlogsView } from '../screens';
-
-const seRoutes = (isAuthenticated) => {
+const useRoutes = (isAuthenticated) => {
 
     // For authorized
     if (isAuthenticated) {
         return(
             <React.Fragment>
                 <Routes>
-                    <Route path="/links" element={ <Links /> } exact />
-                    <Route path="/details" element={ <Details /> } exact />
                     <Route path="/info" element={ <Info /> } exact />
+                    <Route path="/beersview" element={ <BeersView /> } exact />
                     <Route path="/beeradd" element={ <BeerAdd /> } exact />
                     <Route path="/blogsview" element={ <BlogsView /> } exact />
                     <Route path="/blogadd" element={ <BlogAdd /> } exact />
-                    <Route path="*" element={<Navigate to="/links" />} />
+                    <Route path="*" element={<Navigate to="/beersview" />} />
                 </Routes>
             </React.Fragment>
         );
@@ -33,4 +30,4 @@ const seRoutes = (isAuthenticated) => {
     );
 }
 
-export default seRoutes;
+export default useRoutes;
