@@ -1,11 +1,13 @@
 import React, { useContext, useEffect } from 'react';
-import { NavLink, useNavigate, } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
-
+import { NavLink, useNavigate } from 'react-router-dom';
+import {  AuthContext } from '../../context';
 const NavBar = () => {
+
   const navigate = useNavigate();
   const auth = useContext(AuthContext);
+
   const authenticated = !!auth.token;
+
   useEffect(() => {
     const sidenav = document.querySelectorAll('.sidenav');
     M.Sidenav.init(sidenav);

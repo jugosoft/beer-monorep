@@ -1,6 +1,6 @@
 import React from 'react';
 
-const HashTag = (props) => {
+const Category = (props) => {
 
     const {tag, removeTag} = props;
 
@@ -12,4 +12,4 @@ const HashTag = (props) => {
     );
 }
 
-export default HashTag;
+export default Category;

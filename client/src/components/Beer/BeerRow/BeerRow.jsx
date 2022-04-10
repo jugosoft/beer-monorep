@@ -1,7 +1,7 @@
 import React from 'react';
 import 'material-icons';
 
-const LinkRow = (props) => {
+const BeerRow = (props) => {
 
     const { name, type, colour, alcohol } = props;
 
@@ -18,4 +18,4 @@ const LinkRow = (props) => {
     );
 }
 
-export default LinkRow;
+export default BeerRow;

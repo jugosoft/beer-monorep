@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Loader } from "../../components";
-import LinkRow from '../../components/LinkRow/LinkRow';
+import { Loader, BeerRow } from "../../components";
 import useHttp from "../../hooks/http.hook";
 import usePagination from "../../hooks/pagination.hook";
 
-const Links = () => {
+const BeersView = () => {
 
     const { loading, error, request } = useHttp();
     const [beers, setBeers] = useState([]);
@@ -55,12 +54,13 @@ const Links = () => {
                 <div className="row">
                     <ul className="collection">
                         {
-                            beers.map(beer => <LinkRow
-                                key={beer._id}
-                                name={beer.beerName}
-                                type={beer.beerType}
-                                colour={beer.beerColour}
-                                alcohol={beer.beerAlcohol} />
+                            beers.map(beer => 
+                                <BeerRow
+                                    key={beer._id}
+                                    name={beer.beerName}
+                                    type={beer.beerType}
+                                    colour={beer.beerColour}
+                                    alcohol={beer.beerAlcohol} />
                             )}
                     </ul>
 
@@ -76,4 +76,4 @@ const Links = () => {
     );
 }
 
-export default Links;
+export default BeersView;

@@ -20,7 +20,6 @@ router.get('/get/:id', [],
 // GET /api/blog/get
 router.get('/get', async(req, res) => {
 
-    const username = req.query.user;
     // to add categories
     try {
 
@@ -29,18 +28,12 @@ router.get('/get', async(req, res) => {
         console.log(req.query.page);
 
         let blogs;
-        if (username) {
 
-            blogs = await Blog.find({ username })
-                .limit(perPage)
-                .skip(perPage * page);
+        blogs = await Blog.find()
+            .limit(perPage);
 
-        } else {
-
-            blogs = await Blog.find()
-                // .limit(perPage)
-                // .skip(perPage * page);
-
+        if (!blogs) {
+            res.status(400).json({ message: 'Blogs records not found' });
         }
 
         return res.status(200).json({ message: 'Posts are loaded', blogs });

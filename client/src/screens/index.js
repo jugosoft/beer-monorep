@@ -1,16 +1,10 @@
 export { default as Auth }
-from './Auth/Auth.screen';
-export { default as Links }
-from './Links/Links.screen';
-export { default as Details }
-from './Details/Details.screen';
+from './Auth';
 export { default as Info }
-from './Info/Info.screen';
-export { default as BeerAdd }
-from './Beer/BeerAdd.screen';
+from './Info';
+export { BeerAdd, BeersView }
+from './Beer';
 export { default as DefaultLanding }
-from './DefaultLanding/DefaultLanding.screen.jsx';
-export { default as BlogAdd }
-from './Blog/BlogAdd.screen.jsx';
-export { default as BlogsView }
-from './Blog/BlogsView.screen.jsx';
+from './DefaultLanding';
+export { BlogsView, BlogAdd }
+from './Blog';

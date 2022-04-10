@@ -1,23 +1,16 @@
 export { default as Footer }
-from './Footer/Footer';
-
-export { default as LinkRow }
-from './LinkRow/LinkRow';
-
+from './Footer';
+export { default as BeerRow }
+from './Beer';
 export { default as NavBar }
-from './NavBar/NavBar';
-
+from './NavBar';
 export { default as Loader }
-from './Loader/Loader';
-
+from './Loader';
 export { default as TextArea }
-from './TextArea/TextArea';
-
+from './TextArea';
 export { default as Gallery }
-from './Gallery/Gallery';
-
-export { default as HashTag }
-from './HashTag/HashTag';
-
+from './Gallery';
+export { default as Category }
+from './Category';
 export { default as BlogRow }
-from './Blog/BlogRow/BlogRow';
+from './Blog';

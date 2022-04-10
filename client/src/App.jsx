@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { BrowserRouter } from "react-router-dom";
 import 'materialize-css';
-import useRoutes from './routes/routes';
-import { useAuth } from './hooks/auth.hook';
-import { AuthContext } from './context/AuthContext';
+import { useRoutes } from './routes';
+import { useAuth } from './hooks';
+import { AuthContext } from './context';
 import { NavBar, Footer, Loader } from './components';
 
 const App = () => {
