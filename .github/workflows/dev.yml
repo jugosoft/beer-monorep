@@ -27,6 +27,8 @@ jobs:
 
     - name: Install Modules 
       run: npm install
+      run: npm install -g react-scripts
+      run: npm install --prefix client
 
     - name: Run Linter
       run: npm run lint

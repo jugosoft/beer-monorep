@@ -6,6 +6,7 @@
     "scripts": {
         "server": "nodemon server.js --ignore client",
         "client": "npm start --prefix client",
+        "client:install": "npm install --prefix client",
         "client:build": "npm run build --prefix client",
         "lint": "npx eslint ./ --fix",
         "dev": "concurrently --raw --kill-others  \"npm run server\" \"npm run client\"",
