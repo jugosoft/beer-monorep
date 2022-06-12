@@ -26,8 +26,7 @@ jobs:
         cache: 'npm'
 
     - name: Install Modules 
-      run: npm install
-      run: npm install --prefix client
+      run: npm install && npm install --prefix client
 
     - name: Run Linter
       run: npm run lint
