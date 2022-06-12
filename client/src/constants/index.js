@@ -1,2 +1,2 @@
-export { default as KEYS }
-from './keys';
+export {default as KEYS}
+  from './keys';

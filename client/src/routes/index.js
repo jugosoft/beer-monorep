@@ -1,2 +1,2 @@
-export { default as useRoutes }
-from './routes';
+export {default as useRoutes}
+  from './routes';
