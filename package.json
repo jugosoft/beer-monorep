@@ -1,45 +1,48 @@
 {
-  "name": "beer-monorep",
-  "version": "1.0.0",
-  "description": "Beer Application for improving skills in brewing",
-  "main": "app.js",
-  "scripts": {
-    "start": "node app.js",
-    "server": "nodemon server.js --ignore client",
-    "client": "npm start --prefix client",
-    "dev": "concurrently --raw --kill-others  \"npm run server\" \"npm run client\"",
-    "test": ""
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jugosoft/beer-monorep.git"
-  },
-  "keywords": [
-    "beer",
-    "monorepository",
-    "js",
-    "react",
-    "express"
-  ],
-  "author": "me",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jugosoft/beer-monorep/issues"
-  },
-  "homepage": "https://github.com/jugosoft/beer-monorep#readme",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "config": "^3.3.7",
-    "cors": "^2.8.5",
-    "express": "^4.17.2",
-    "express-validator": "^6.14.0",
-    "jsonwebtoken": "^8.5.1",
-    "material-icons": "^1.10.6",
-    "mongoose": "^6.1.6",
-    "uuid": "^8.3.2"
-  },
-  "devDependencies": {
-    "concurrently": "^7.0.0",
-    "nodemon": "^2.0.15"
-  }
+    "name": "beer-monorep",
+    "version": "1.0.0",
+    "description": "Beer Application for improving skills in brewing",
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "server": "nodemon server.js --ignore client",
+        "client": "npm start --prefix client",
+        "lint": "npx eslint ./ --fix",
+        "dev": "concurrently --raw --kill-others  \"npm run server\" \"npm run client\"",
+        "test": ""
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jugosoft/beer-monorep.git"
+    },
+    "keywords": [
+        "beer",
+        "monorepository",
+        "js",
+        "react",
+        "express"
+    ],
+    "author": "me",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/jugosoft/beer-monorep/issues"
+    },
+    "homepage": "https://github.com/jugosoft/beer-monorep#readme",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "config": "^3.3.7",
+        "cors": "^2.8.5",
+        "express": "^4.17.2",
+        "express-validator": "^6.14.0",
+        "jsonwebtoken": "^8.5.1",
+        "material-icons": "^1.10.6",
+        "mongoose": "^6.1.6",
+        "uuid": "^8.3.2"
+    },
+    "devDependencies": {
+        "concurrently": "^7.0.0",
+        "eslint": "^8.17.0",
+        "eslint-config-google": "^0.14.0",
+        "nodemon": "^2.0.15"
+    }
 }
