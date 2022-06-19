@@ -1,6 +1,6 @@
 import React from 'react';
 import { Route, Routes, Navigate } from "react-router-dom";
-import {Auth, BeersView, BeerAdd, DefaultLanding, BlogsView, BlogAdd, Info } from '../screens';
+import {Auth, BeersView, BeerAdd, DefaultLanding, BlogsView, BlogAdd, Info, MyList } from '../screens';
 
 const useRoutes = (isAuthenticated) => {
 
@@ -14,6 +14,7 @@ const useRoutes = (isAuthenticated) => {
                     <Route path="/beeradd" element={ <BeerAdd /> } exact />
                     <Route path="/blogsview" element={ <BlogsView /> } exact />
                     <Route path="/blogadd" element={ <BlogAdd /> } exact />
+                    <Route path="/mylist" element={ <MyList /> } exact />
                     <Route path="*" element={<Navigate to="/beersview" />} />
                 </Routes>
             </React.Fragment>
@@ -25,6 +26,7 @@ const useRoutes = (isAuthenticated) => {
         <Routes> 
             <Route path='/default' element={<DefaultLanding />} exact />
             <Route path='/auth' element={<Auth />} exact />
+            <Route path='/mylist' element={<Auth />} exact />
             <Route path="*" element={<Navigate to="/default" />} />
         </Routes>
     );

@@ -6,7 +6,7 @@ module.exports = {
   'extends': [
     'google',
   ],
-  'ignorePatterns': ['client/*'],
+  'ignorePatterns': ['*/node_modules/*', 'client/*', '*/build/*'],
   'parserOptions': {
     'ecmaVersion': 'latest',
     'sourceType': 'module',
