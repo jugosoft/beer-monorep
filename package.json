@@ -1,28 +1,4 @@
 {
-<<<<<<< Updated upstream
-    "name": "beer-monorep",
-    "version": "1.0.0",
-    "description": "Beer Application for improving skills in brewing",
-    "main": "app.js",
-    "scripts": {
-        "start": "node app.js",
-        "server": "nodemon server.js --ignore client",
-        "client": "npm start --prefix client",
-        "lint": "npx eslint ./ --fix",
-        "dev": "concurrently --raw --kill-others  \"npm run server\" \"npm run client\"",
-        "test": ""
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/jugosoft/beer-monorep.git"
-    },
-    "keywords": [
-        "beer",
-        "monorepository",
-        "js",
-        "react",
-        "express"
-=======
   "name": "beer-monorep1",
   "version": "0.0.1",
   "description": "",
@@ -85,7 +61,6 @@
       "js",
       "json",
       "ts"
->>>>>>> Stashed changes
     ],
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
@@ -112,6 +87,7 @@
         "nodemon": "^2.0.15"
     }
 }
+<<<<<<< HEAD
 =======
     "collectCoverageFrom": [
       "**/*.(t|j)s"
@@ -121,3 +97,5 @@
   }
 }
 >>>>>>> Stashed changes
+=======
+>>>>>>> 4535b4c5e4db0d7da0a2a2223f1064e094a1ba89
