@@ -1,5 +1,5 @@
 {
-  "name": "beer-monorep1",
+  "name": "beer-monorep",
   "version": "0.0.1",
   "description": "",
   "author": "",
@@ -27,7 +27,6 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
-    "config": "^3.3.7",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "uuid": "^8.3.2",
@@ -35,8 +34,10 @@
   },
   "devDependencies": {
     "@nestjs/cli": "^8.0.0",
+    "@nestjs/config": "^2.1.0",
     "@nestjs/schematics": "^8.0.0",
     "@nestjs/testing": "^8.0.0",
+    "@nestjs/typeorm": "^8.1.4",
     "@types/express": "^4.17.13",
     "@types/jest": "27.5.0",
     "@types/node": "^16.0.0",
@@ -47,6 +48,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "jest": "28.0.3",
+    "pg": "^8.7.3",
     "prettier": "^2.3.2",
     "source-map-support": "^0.5.20",
     "supertest": "^6.1.3",
@@ -54,6 +56,7 @@
     "ts-loader": "^9.2.3",
     "ts-node": "^10.0.0",
     "tsconfig-paths": "4.0.0",
+    "typeorm": "^0.3.7",
     "typescript": "^4.3.5"
   },
   "jest": {
@@ -67,35 +70,28 @@
     "transform": {
       "^.+\\.(t|j)s$": "ts-jest"
     },
-<<<<<<< Updated upstream
     "homepage": "https://github.com/jugosoft/beer-monorep#readme",
     "dependencies": {
-        "bcryptjs": "^2.4.3",
-        "config": "^3.3.7",
-        "cors": "^2.8.5",
-        "express": "^4.17.2",
-        "express-validator": "^6.14.0",
-        "jsonwebtoken": "^8.5.1",
-        "material-icons": "^1.10.6",
-        "mongoose": "^6.1.6",
-        "uuid": "^8.3.2"
+      "bcryptjs": "^2.4.3",
+      "config": "^3.3.7",
+      "cors": "^2.8.5",
+      "express": "^4.17.2",
+      "express-validator": "^6.14.0",
+      "jsonwebtoken": "^8.5.1",
+      "material-icons": "^1.10.6",
+      "mongoose": "^6.1.6",
+      "uuid": "^8.3.2"
     },
     "devDependencies": {
-        "concurrently": "^7.0.0",
-        "eslint": "^8.17.0",
-        "eslint-config-google": "^0.14.0",
-        "nodemon": "^2.0.15"
+      "concurrently": "^7.0.0",
+      "eslint": "^8.17.0",
+      "eslint-config-google": "^0.14.0",
+      "nodemon": "^2.0.15"
     }
+  },
+  "collectCoverageFrom": [
+    "**/*.(t|j)s"
+  ],
+  "coverageDirectory": "../coverage",
+  "testEnvironment": "node"
 }
-<<<<<<< HEAD
-=======
-    "collectCoverageFrom": [
-      "**/*.(t|j)s"
-    ],
-    "coverageDirectory": "../coverage",
-    "testEnvironment": "node"
-  }
-}
->>>>>>> Stashed changes
-=======
->>>>>>> 4535b4c5e4db0d7da0a2a2223f1064e094a1ba89
