@@ -11,6 +11,5 @@ export const typeOrm = {
     password: 'TYPEORM_PASSWORD',
     database: 'TYPEORM_DATABASE',
     port: 'TYPEORM_PORT',
-    entities: __dirname + 'dist/**/*.entity{.ts,.js}',
-
-}
+    entities_mask: __dirname + 'dist/**/*.entity{.ts,.js}',
+};
