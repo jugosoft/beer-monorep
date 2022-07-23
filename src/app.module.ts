@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver } from '@nestjs/apollo';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 import { environment, typeOrm } from 'constants/environment';
@@ -13,6 +14,7 @@ import { UsersModule } from './users/users.module';
       autoSchemaFile: 'schema.gql',
       sortSchema: true,
       playground: true,
+      driver: ApolloDriver,
     }),
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],

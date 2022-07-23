@@ -4,23 +4,23 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 @ObjectType()
 @Entity('users')
 export class UserEntity {
-    @Field(() => ID)
-    @PrimaryGeneratedColumn()
-    id: number;
-    
-    @Field()
-    @CreateDateColumn()
-    createdAt: Date;
+  @Field(() => ID)
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Field()
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @Field()
+  @CreateDateColumn()
+  createdAt: Date;
 
-    @Field()
-    @Column()
-    email: string;
+  @Field()
+  @UpdateDateColumn()
+  updatedAt: Date;
 
-    @Field({nullable: true})
-    @Column({nullable: true})
-    name: string;
+  @Field()
+  @Column()
+  email: string;
+
+  @Field({ nullable: true })
+  @Column({ nullable: true })
+  name: string;
 }
