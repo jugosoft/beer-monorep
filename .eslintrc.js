@@ -1,17 +1,15 @@
 module.exports = {
-  'env': {
-    'browser': true,
-    'es2021': true,
-  },
-  'extends': [
-    'google',
+  root: true,
+  parser: '@typescript-eslint/parser',
+  plugins: [
+    '@typescript-eslint',
   ],
-  'ignorePatterns': ['client/*'],
-  'parserOptions': {
-    'ecmaVersion': 'latest',
-    'sourceType': 'module',
-  },
-  'rules': {
-    'require-jsdoc': 'off',
+  extends: [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  rules: {
+    indent: ['error', 2],
   },
 };

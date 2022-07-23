@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3'
 
 services:
   db:
@@ -13,3 +13,23 @@ services:
       - ./pgdata:/var/lib/postgresql/data
     ports:
       - ${TYPEORM_PORT}:${TYPEORM_PORT}
+
+  backend:
+    container_name: backend-nest-lesson-1
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+      - db
+    restart: unless-stopped
+    ports:
+      - '${API_PORT}:3001'
+    environment:
+      - API_PORT=${API_PORT}
+      - API_HOST=${API_HOST}
+      - TYPEORM_CONNECTION=${TYPEORM_CONNECTION}
+      - TYPEORM_USERNAME=${TYPEORM_USERNAME}
+      - TYPEORM_PASSWORD=${TYPEORM_PASSWORD}
+      - TYPEORM_DATABASE=${TYPEORM_DATABASE}
+      - TYPEORM_PORT=${TYPEORM_PORT}
+      - TYPEORM_HOST=db
