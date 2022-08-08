@@ -5,7 +5,8 @@ import { ApolloDriver } from '@nestjs/apollo';
 import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 import { environment, typeOrm } from 'constants/environment';
-import { UsersModule } from './users/users.module';
+import { UsersModule } from './modules/users/users.module';
+import { BeersModule } from './modules/beers/beers.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { UsersModule } from './users/users.module';
       },
     }),
     UsersModule,
+    BeersModule,
   ],
 })
 export class AppModule { }

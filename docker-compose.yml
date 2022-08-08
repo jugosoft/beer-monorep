@@ -15,7 +15,7 @@ services:
       - ${TYPEORM_PORT}:${TYPEORM_PORT}
 
   backend:
-    container_name: backend-nest-lesson-1
+    container_name: beer-app-backend
     build:
       context: .
       dockerfile: ./Dockerfile
