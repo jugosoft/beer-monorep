@@ -6,21 +6,21 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 export class UserEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
-  id: number;
+    id: number;
 
   @Field()
   @CreateDateColumn()
-  createdAt: Date;
+    createdAt: Date;
 
   @Field()
   @UpdateDateColumn()
-  updatedAt: Date;
+    updatedAt: Date;
 
   @Field()
   @Column()
-  email: string;
+    email: string;
 
   @Field({ nullable: true })
   @Column({ nullable: true })
-  name: string;
+    name: string;
 }
