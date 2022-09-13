@@ -29,7 +29,8 @@ input CreateBeerInput {
 
 input CreateUserInput {
   email: String!
-  name: String
+  name: String!
+  password: String!
 }
 
 """

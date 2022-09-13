@@ -10,7 +10,6 @@ import { BeersModule } from './modules/beers/beers.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { Migrate20220913 } from 'db/migrations/Migrate20220913';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true, envFilePath: environment.envFilePath }),

@@ -1,18 +1,33 @@
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 
 import { UserEntity } from 'src/modules/users/entities/user.entity';
+import { CreateUserInput } from 'src/modules/users/inputs/create-user.input';
 import { UserService } from 'src/modules/users/services/user/user.service';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UserService) {}
+  constructor(
+    private usersService: UserService,
+    private jwtService: JwtService) {}
 
-  async validateUser(username: string, pass: string): Promise<any> {
+  async validateUser(username: string, password: string): Promise<boolean> {
     const user: UserEntity = await this.usersService.getOneUserByName(username);
-    if (user && user.password === pass) {
-      const { password, ...result } = user;
-      return result;
+    if (user && user.password === password) {
+      return true;
     }
-    return null;
+    return false;
+  }
+
+  async login(username: string) {
+    const payload = { username: username };
+    return {
+      access_token: this.jwtService.sign(payload),
+    };
+  }
+
+  async register(createUserInput: CreateUserInput) {
+    const user = await this.usersService.createUser(createUserInput);
+    return await this.login(user.name);
   }
 }
