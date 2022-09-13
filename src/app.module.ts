@@ -7,6 +7,9 @@ import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { environment, typeOrm } from 'constants/environment';
 import { UsersModule } from './modules/users/users.module';
 import { BeersModule } from './modules/beers/beers.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { Migrate20220913 } from 'db/migrations/Migrate20220913';
+
 
 @Module({
   imports: [
@@ -29,14 +32,17 @@ import { BeersModule } from './modules/beers/beers.module';
           database: config.get<string>(typeOrm.database),
           port: config.get<number>(typeOrm.port),
           entities: [typeOrm.entities_mask],
-          synchronize: true,
+          migrationsTableName: "migrations",
+          migrations: [Migrate20220913],
           autoLoadEntities: true,
           logging: true,
+          synchronize: true,
         };
       },
     }),
     UsersModule,
     BeersModule,
+    AuthModule,
   ],
 })
 export class AppModule { }

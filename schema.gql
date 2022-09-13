@@ -74,6 +74,7 @@ type UserEntity {
   createdAt: DateTime!
   email: String!
   id: ID!
-  name: String
+  name: String!
+  password: String!
   updatedAt: DateTime!
 }
