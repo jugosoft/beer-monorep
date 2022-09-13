@@ -1,7 +1,7 @@
 import { Controller,Post, UseGuards, Body } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
-import { CreateUserInput } from 'src/modules/users/inputs/create-user.input';
 
+import { CreateUserInput } from '../../../modules/users/inputs/create-user.input';
+import { LocalAuthGuard } from '../guards/local-auth.guard';
 import { AuthLoginInput } from '../inputs/auth-login.input';
 import { AuthService } from '../services/auth.service';
 
@@ -11,7 +11,7 @@ export class AuthController {
     private authService: AuthService,
   ) {}
 
-  @UseGuards(AuthGuard('local'))
+  @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Body() authLoginInput: AuthLoginInput): Promise<any> {
     return this.authService.login(authLoginInput.name);

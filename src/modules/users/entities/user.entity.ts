@@ -17,11 +17,11 @@ export class UserEntity {
   updatedAt: Date;
 
   @Field()
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Field()
-  @Column()
+  @Column({ unique: true })
   name: string;
 
   @Field()

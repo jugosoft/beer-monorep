@@ -11,15 +11,15 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
     private authService: AuthService,
     private cryptoService: CryptoService,
     ) {
-    super();
+    super({ usernameField: 'name' });
   }
 
-  async validate(username: string, password: string): Promise<boolean> {
+  async validate(username: string, password: string) { 
     const hashedPassword: string = await this.cryptoService.hash(password);
     const isUserExists = await this.authService.validateUser(username, hashedPassword);
     if (!isUserExists) {
       throw new UnauthorizedException();
     }
-    return isUserExists;
+    return true;
   }
 }
