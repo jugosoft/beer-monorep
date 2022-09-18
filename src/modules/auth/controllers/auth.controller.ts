@@ -1,8 +1,9 @@
-import { Controller,Post, Body, HttpCode, HttpStatus, UseGuards, Req } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
+import { Body, Controller, HttpCode, HttpStatus, Post, Req, UseGuards } from '@nestjs/common';
 import { Request } from 'express';
 
+import { GetCurrentUserId, GetCurrentUser } from 'src/common';
 import { CreateUserInput } from '../../../modules/users/inputs/create-user.input';
+import { AtGuard, RtGuard } from '../guards';
 import { AuthLoginInput } from '../inputs/auth-login.input';
 import { AuthService } from '../services/auth.service';
 import { Tokens } from '../types';
@@ -23,19 +24,20 @@ export class AuthController {
     return this.authService.registerLocal(authRegisterInput);
   }
 
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AtGuard)
   @Post('logout')
   @HttpCode(HttpStatus.OK)
-  async logout(@Req() req: Request): Promise<any> {
-    const user = req['user'];
-    return this.authService.logout(user['body']['sub  ']);
+  async logout(@GetCurrentUserId() userId: number): Promise<boolean> {
+    return this.authService.logout(userId);
   }
 
-  @UseGuards(AuthGuard('jwt-refresh'))
+  @UseGuards(RtGuard)
   @Post('refresh')
   @HttpCode(HttpStatus.OK)
-  async refreshTokens(@Req() req: Request): Promise<any> {
-    const user = req['user'];
-    return this.authService.refreshTokens(user['body']['sub'], user['body']['refreshToken']);
+  async refreshTokens(
+    @GetCurrentUserId() userId: number,
+    @GetCurrentUser('refreshToken') refreshToken: string
+  ): Promise<Tokens> {
+    return this.authService.refreshTokens(userId, refreshToken);
   }
 }

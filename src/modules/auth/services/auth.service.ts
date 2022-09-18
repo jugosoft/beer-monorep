@@ -40,8 +40,9 @@ export class AuthService {
     return tokens;
   }
 
-  async logout(userId: number) {
+  async logout(userId: number) : Promise<boolean>{
     await this.usersService.updateUserRt({id: userId, hashedRT: null});
+    return true;
   }
 
   async updateRtHash(userId: number, refreshToken: string): Promise<void> {
