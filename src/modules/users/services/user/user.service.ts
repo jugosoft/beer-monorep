@@ -2,9 +2,10 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { UserEntity } from '../../entities/user.entity';
+import { UserEntity } from 'src/entities/user.entity';
 import { CreateUserInput } from '../../inputs/create-user.input';
 import { UpdateUserInput } from '../../inputs/update-user.input';
+import { UpdateUserRtInput } from '../../inputs/update-user-rt.input';
 
 @Injectable()
 export class UserService {
@@ -19,6 +20,10 @@ export class UserService {
 
   async getOneUser(id: number): Promise<UserEntity> | null {
     return await this.userRepository.findOne({ where: { id: id } });
+  }
+
+  async getOneUserByName(name: string): Promise<UserEntity> | null {
+    return await this.userRepository.findOne({ where: { name: name } });
   }
 
   async getAllUsers(): Promise<UserEntity[]> {
@@ -36,5 +41,10 @@ export class UserService {
   async updateUser(updateUserInput: UpdateUserInput): Promise<UserEntity> {
     await this.userRepository.update({ id: updateUserInput.id }, { ...updateUserInput });
     return await this.getOneUser(updateUserInput.id);
+  }
+
+  async updateUserRt(updateUserRtInput: UpdateUserRtInput): Promise<UserEntity> {
+    await this.userRepository.update({ id: updateUserRtInput.id }, { ...updateUserRtInput });
+    return await this.getOneUser(updateUserRtInput.id);
   }
 }

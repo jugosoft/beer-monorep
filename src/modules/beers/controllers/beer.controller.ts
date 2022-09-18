@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 
-import { BeerEntity } from '../entities/beer.entity';
+import { BeerEntity } from '../../../entities/beer.entity';
 import { CreateBeerInput } from '../inputs/create-beer.input';
 import { UpdateBeerInput } from '../inputs/update-beer.input';
 import { BeerService } from '../services/beer/beer.service';

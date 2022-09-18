@@ -6,21 +6,29 @@ import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateCol
 export class UserEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
-    id: number;
+  id: number;
 
   @Field()
   @CreateDateColumn()
-    createdAt: Date;
+  createdAt: Date;
 
   @Field()
   @UpdateDateColumn()
-    updatedAt: Date;
+  updatedAt: Date;
+
+  @Field()
+  @Column({ unique: true })
+  email: string;
+
+  @Field()
+  @Column({ unique: true })
+  name: string;
 
   @Field()
   @Column()
-    email: string;
+  password: string;
 
-  @Field({ nullable: true })
-  @Column({ nullable: true })
-    name: string;
+  @Field({nullable: true})
+  @Column({nullable: true})
+  hashedRT: string;
 }

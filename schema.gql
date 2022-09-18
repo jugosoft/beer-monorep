@@ -29,7 +29,8 @@ input CreateBeerInput {
 
 input CreateUserInput {
   email: String!
-  name: String
+  name: String!
+  password: String!
 }
 
 """
@@ -66,6 +67,7 @@ input UpdateBeerInput {
 
 input UpdateUserInput {
   email: String
+  hashedRT: String
   id: ID!
   name: String
 }
@@ -73,7 +75,9 @@ input UpdateUserInput {
 type UserEntity {
   createdAt: DateTime!
   email: String!
+  hashedRT: String
   id: ID!
-  name: String
+  name: String!
+  password: String!
   updatedAt: DateTime!
 }
