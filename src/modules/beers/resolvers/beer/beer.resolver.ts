@@ -1,6 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
-import { BeerEntity } from '../../entities/beer.entity';
+import { BeerEntity } from '../../../../entities/beer.entity';
 import { CreateBeerInput } from '../../inputs/create-beer.input';
 import { UpdateBeerInput } from '../../inputs/update-beer.input';
 import { BeerService } from '../../services/beer/beer.service';

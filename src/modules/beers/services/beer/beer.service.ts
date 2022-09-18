@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
-import { BeerEntity } from '../../entities/beer.entity';
+import { BeerEntity } from '../../../../entities/beer.entity';
 import { CreateBeerInput } from '../../../beers/inputs/create-beer.input';
 import { UpdateBeerInput } from '../../inputs/update-beer.input';
 

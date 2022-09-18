@@ -27,4 +27,8 @@ export class UserEntity {
   @Field()
   @Column()
   password: string;
+
+  @Field({nullable: true})
+  @Column({nullable: true})
+  hashedRT: string;
 }
