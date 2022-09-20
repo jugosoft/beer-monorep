@@ -53,7 +53,7 @@ export class AuthService {
   async refreshTokens(userId: number, refreshToken: string): Promise<Tokens> {
     const user = await this.usersService.getOneUser(userId);
 
-    if (!user) throw new ForbiddenException('Access Denied. Try again!');
+    if (!user || !user.hashedRT) throw new ForbiddenException('Access Denied. Try again!');
  
     if (!this.cryptoService.verify(refreshToken, user.hashedRT)) {
       throw new ForbiddenException('Access Denied. Try again!');
