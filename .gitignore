@@ -1,4 +1,6 @@
 dist
 node_modules
 pgdata
+.vscode
+.pytest_cache
 *.pyc
