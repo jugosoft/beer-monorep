@@ -3,7 +3,7 @@ version: '3'
 services:
   db:
     container_name: beer-app-db
-    image: postgres:14.0-alpine
+    image: postgres:15beta4
     restart: always
     environment:
       - POSTGRES_USER=${TYPEORM_USERNAME}
