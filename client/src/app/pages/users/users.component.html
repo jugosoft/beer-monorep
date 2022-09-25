@@ -1,3 +1,21 @@
-<div class="alert alert-info">
-  <h1>LooUSers</h1>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="list-group mb-2">
+      <button class="btn btn-outline-primary">
+        <app-icon icon="bi bi-plus"></app-icon>
+        Add User
+      </button>
+    </div>
+    <div class="list-group">
+      <a 
+        class="list-group-item list-group-item-action"
+        [routerLink]="[1]"
+      >
+        Sample
+      </a>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <router-outlet></router-outlet>
+  </div>
 </div>

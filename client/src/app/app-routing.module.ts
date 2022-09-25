@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', loadChildren: () => import('./pages/main/main.module').then(module => module.MainModule)},
-  {path: 'users', loadChildren: () => import('./pages/users/users.module').then(module => module.UsersModule)},
-  {path: 'about', loadChildren: () => import('./pages/about/about.module').then(module => module.AboutModule)},
+  {path: '', pathMatch: 'full', loadChildren: async () => (await import('./pages/main/main.module')).MainModule},
+  {path: 'users', loadChildren: async () => (await import('./pages/users/users.module')).UsersModule},
+  {path: 'about', loadChildren: async () => (await import('./pages/about/about.module')).AboutModule},
   {path: '**', redirectTo: '/'},
 ];
 

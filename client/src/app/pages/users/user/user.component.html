@@ -1,0 +1,21 @@
+<div class="card p-2">
+  <img class="img card-img-top" alt="User's photo" [src]="imgMock">
+  <div class="card-body">
+    <h5 class="card-title">Name</h5>
+    <p class="card-text">Email</p>
+    <div class="row">
+      <div class="col-6 text-center">
+        <button class="btn btn-outline-secondary">
+          Edit
+          <app-icon icon="bi bi-pencil"></app-icon>
+        </button>
+      </div>
+      <div class="col-6 text-center">
+        <button class="btn btn-outline-secondary">
+          <app-icon icon="bi bi-trash"></app-icon>
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
