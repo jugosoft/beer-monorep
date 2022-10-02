@@ -1,0 +1,83 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type BeerEntity {
+  alcohol: Float!
+  barrel_aged: Float
+  bitterness: Float!
+  colour_ebc: Float
+  colour_srm: Float
+  createdAt: DateTime!
+  final_gravity: Float
+  id: ID!
+  name: String!
+  original_gravity: Float
+  updatedAt: DateTime!
+}
+
+input CreateBeerInput {
+  alcohol: Float!
+  barrel_aged: Float
+  bitterness: Float!
+  colour_ebc: Float
+  colour_srm: Float
+  final_gravity: Float
+  name: String!
+  original_gravity: Float
+}
+
+input CreateUserInput {
+  email: String!
+  name: String!
+  password: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Mutation {
+  createBeer(createBeer: CreateBeerInput!): BeerEntity!
+  createUser(createUser: CreateUserInput!): UserEntity!
+  removeBeer(removeBeer: Float!): Float!
+  removeUser(id: Float!): Float!
+  updateBeer(updateBeer: UpdateBeerInput!): BeerEntity!
+  updateUser(updateUser: UpdateUserInput!): UserEntity!
+}
+
+type Query {
+  getAllBeers: [BeerEntity!]!
+  getAllUsers: [UserEntity!]!
+  getOneBeer(id: Float!): BeerEntity!
+  getOneUser(id: Float!): UserEntity!
+}
+
+input UpdateBeerInput {
+  alcohol: Float
+  barrel_aged: Float
+  bitterness: Float
+  colour_ebc: Float
+  colour_srm: Float
+  final_gravity: Float
+  id: ID!
+  original_gravity: Float
+}
+
+input UpdateUserInput {
+  email: String
+  hashedRT: String
+  id: ID!
+  name: String
+}
+
+type UserEntity {
+  createdAt: DateTime!
+  email: String!
+  hashedRT: String
+  id: ID!
+  name: String!
+  password: String!
+  updatedAt: DateTime!
+}
