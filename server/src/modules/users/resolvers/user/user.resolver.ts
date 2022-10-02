@@ -22,7 +22,7 @@ export class UserResolver {
   }
 
   @Mutation(() => Number)
-  async removeUser(@Args('removeUser') id: number): Promise<number> {
+  async removeUser(@Args('id') id: number): Promise<number> {
     return await this.userService.removeOneUser(id);
   }
 

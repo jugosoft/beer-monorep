@@ -6,6 +6,7 @@ import { UsersComponent } from './users.component';
 import { IconModule } from 'src/app/components/icon/icon.module';
 import { UserModule } from './user/user.module';
 import { UserComponent } from './user/user.component';
+import { UserFormModule } from 'src/app/components/user-form/user-form.module';
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { UserComponent } from './user/user.component';
     CommonModule,
     IconModule,
     UserModule,
+    UserFormModule,
     RouterModule.forChild([
       {
         path: '', component: UsersComponent, children: [

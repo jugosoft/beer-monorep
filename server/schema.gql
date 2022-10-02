@@ -42,7 +42,7 @@ type Mutation {
   createBeer(createBeer: CreateBeerInput!): BeerEntity!
   createUser(createUser: CreateUserInput!): UserEntity!
   removeBeer(removeBeer: Float!): Float!
-  removeUser(removeUser: Float!): Float!
+  removeUser(id: Float!): Float!
   updateBeer(updateBeer: UpdateBeerInput!): BeerEntity!
   updateUser(updateUser: UpdateUserInput!): UserEntity!
 }

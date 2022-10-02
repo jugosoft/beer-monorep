@@ -1,7 +1,10 @@
 <div class="row" *ngIf="users$ | async as users">
   <div class="col-sm-6">
     <div class="list-group mb-2">
-      <button class="btn btn-outline-primary">
+      <button 
+        (click)="isNewTrigger()"
+        class="btn btn-outline-primary"
+      >
         <app-icon icon="bi bi-plus"></app-icon>
         Add User
       </button>
@@ -9,15 +12,21 @@
 
     <div class="list-group">
       <a 
-        *ngFor="let user of users"
-        class="list-group-item list-group-item-action"
+        *ngFor="let user of users" 
+        class="list-group-item list-group-item-action" 
         [routerLink]="[user.id]"
+        (click)="isNew = false"
       >
         {{ user.name }}
       </a>
     </div>
   </div>
   <div class="col-sm-6">
-    <router-outlet></router-outlet>
+    <ng-container *ngIf="!isNew">
+      <router-outlet></router-outlet>
+    </ng-container>
+    <ng-container *ngIf="isNew">
+      <app-user-form (onSubmit)="onSubmit($event)"></app-user-form>
+    </ng-container>
   </div>
 </div>
