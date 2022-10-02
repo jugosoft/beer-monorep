@@ -1,0 +1,31 @@
+<div class="card p-2" *ngIf="user$ | async as user">
+  <ng-container *ngIf="!isChange">
+    <img class="img card-img-top" alt="User's photo" [src]="imgMock">
+    <div class="card-body">
+      <h5 class="card-title">{{ user.name }}</h5>
+      <p class="card-text">{{ user.email }}</p>
+      <div class="alert alert-warning">
+        <span class="text-mute">Создан: {{ user.createdAt | date: 'dd.MM.yyyy HH:mm' }}</span><br />
+        <span class="text-mute">Обновлено: {{ user.updatedAt | date: 'dd.MM.yyyy HH:mm' }}</span>
+      </div>
+      <div class="row">
+        <div class="col-6 text-center">
+          <button (click)="change()" class="btn btn-outline-secondary">
+            Edit
+            <app-icon icon="bi bi-pencil"></app-icon>
+          </button>
+        </div>
+        <div class="col-6 text-center">
+          <button (click)="delete(user.id)" class="btn btn-outline-secondary">
+            <app-icon icon="bi bi-trash"></app-icon>
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="isChange">
+    <button class="btn btn-primary" (click)="isChange = !isChange">Назат</button>
+    <app-user-form [user]="user" (onSubmit)="onSubmit($event)"></app-user-form>
+  </ng-container>
+</div>
