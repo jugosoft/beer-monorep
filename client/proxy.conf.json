@@ -1,0 +1,7 @@
+{
+    "/graphql": {
+      "target": "http://localhost:3001/graphql",
+      "secure": false,
+      "logLevel": "debug"
+    }
+}
