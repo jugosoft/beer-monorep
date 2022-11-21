@@ -7,6 +7,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IconModule } from './components/icon/icon.module';
 import { NavComponent } from './components/nav.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
+
+export function tokenGetter(): string | null {
+  return localStorage.getItem('ACCESS_TOKEN_KEY');
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +25,12 @@ import { NavComponent } from './components/nav.component';
     IconModule,
     GraphQLModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        allowedDomains: environment.tokenWhiteListedDomains,
+      }
+    })
   ],
   providers: [],
   bootstrap: [AppComponent]

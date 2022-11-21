@@ -16,6 +16,6 @@ import { AtStrategy, RtStrategy } from './strategies';
     JwtModule.register({}),
   ],
   providers: [AuthService, CryptoService, AtStrategy, RtStrategy],
-  // controllers:[AuthController]
+  controllers:[AuthController]
 })
 export class AuthModule {}
