@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Apollo } from 'apollo-angular';
 import { map, Observable } from 'rxjs';
 import { IUser } from 'src/app/interfaces/IUser';
+import { GET_ALL_USERS, IGET_ALL_USERS } from './gql/get-all-users';
 import { UsersService } from './users.service';
 
 
