@@ -1,25 +1,25 @@
 import { Injectable } from '@angular/core';
-
 import { Observable, of } from 'rxjs';
 import { tap, delay } from 'rxjs/operators';
+import { AuthModule } from './auth.module';
+
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: AuthModule
 })
 export class AuthService {
-
     isUserLoggedIn: boolean = false;
 
-    login(userName: string, password: string): Observable<boolean> {
-        console.log(userName);
+    login(email: string, password: string): Observable<boolean> {
+        console.log(email);
         console.log(password);
-        this.isUserLoggedIn = userName == 'admin' && password == 'admin';
+        this.isUserLoggedIn = email == 'admin@mail.ru' && password == 'admin';
         localStorage.setItem('isUserLoggedIn', this.isUserLoggedIn ? "true" : "false");
 
         return of(this.isUserLoggedIn).pipe(
             delay(1000),
             tap(val => {
-                console.log("Is User Authentication is successful: " + val);
+                alert('Is User Authentication is successful: ');
             })
         );
     }
