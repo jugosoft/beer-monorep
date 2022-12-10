@@ -19,7 +19,7 @@ export class AuthService {
         return of(this.isUserLoggedIn).pipe(
             delay(1000),
             tap(val => {
-                alert('Is User Authentication is successful: ');
+                alert('Is User Authentication is successful');
             })
         );
     }

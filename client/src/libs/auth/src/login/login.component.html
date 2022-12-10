@@ -1,64 +1,83 @@
-<!-- Page Content -->
-<div class="container">
-    <div class="row">
-        <div
-            class="col-lg-12 text-center"
-            style="padding-top: 20px;"
+<div>
+    <div
+        class="alert"
+        [ngClass]="{'alert-danger': 
+        formData.get('email')?.touched && 
+        formData.get('email')?.invalid || 
+        formData.get('password')?.touched && 
+        formData.get('password')?.invalid || 
+        formData.get('agreement')?.touched && 
+        formData.get('agreement')?.invalid}"
+    >
+        <form
+            [formGroup]="formData"
+            (ngSubmit)="onSubmit()"
         >
-            <div
-                class="container box"
-                style="margin-top: 10px; padding-left: 0px; padding-right: 0px;"
-            >
-                <div class="row">
-                    <div
-                        class="col-12"
-                        style="text-align: center;"
-                    >
-                        <form
-                            [formGroup]="formData"
-                            (ngSubmit)="onClickSubmit(formData.value)"
-                            class="form-signin"
-                        >
-                            <h2 class="form-signin-heading">Пожалуйста, войдите в учётную запись</h2>
-                            <label
-                                for="email"
-                                class="sr-only"
-                            >
-                                Email адрес
-                            </label>
-                            <input
-                                type="text"
-                                id="email"
-                                class="form-control"
-                                formControlName="email"
-                                placeholder="Email"
-                                required
-                                autofocus
-                            >
-                            <label
-                                for="password"
-                                class="sr-only"
-                            >
-                                Password
-                            </label>
-                            <input
-                                type="password"
-                                id="password"
-                                class="form-control"
-                                formControlName="password"
-                                placeholder="Пароль"
-                                required
-                            >
-                            <button
-                                class="btn btn-lg btn-primary btn-block"
-                                type="submit"
-                            >
-                                Войти
-                            </button>
-                        </form>
-                    </div>
-                </div>
+            <div class="form-group">
+                <label>Email address</label>
+                <input
+                    type="email"
+                    class="form-control"
+                    formControlName="email"
+                    placeholder="Enter email"
+                >
+                <small
+                    class="form-text text-muted"
+                    *ngIf="formData.get('email')?.touched && formData.get('email')?.errors?.['required']"
+                >
+                    Укажи мэйл, сука
+                </small>
+                <small
+                    class="form-text text-muted"
+                    *ngIf="formData.get('email')?.touched && formData.get('email')?.errors?.['email']"
+                >
+                    Укажи мэйл корректно, сука
+                </small>
             </div>
-        </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input
+                    type="password"
+                    class="form-control"
+                    formControlName="password"
+                    placeholder="Password"
+                >
+            </div>
+            <small
+                class="form-text text-muted"
+                *ngIf="formData.get('email')?.touched && formData.get('password')?.errors?.['required']"
+            >
+                Укажи пароль, сука
+            </small>
+            <small
+                class="form-text text-muted"
+                *ngIf="formData.get('email')?.touched && formData.get('password')?.errors?.['minlength']"
+            >   
+                Минимальная длина пароля - {{formData.get('password')?.errors?.['minlength']?.requiredLength}}
+          символов, сука. Сейчас {{formData.get('password')?.errors?.['minlength']?.actualLength}}
+            </small>
+            <div class="form-check">
+                <input
+                    type="checkbox"
+                    class="form-check-input"
+                    formControlName="agreement"
+                >
+                <label class="form-check-label">Go fuck urself</label>
+            </div>
+            <small
+                class="form-text text-muted"
+                *ngIf="!formData.get('agreement')?.touched && formData.get('agreement')?.errors?.['required']"
+            >
+                Согласие идти на хуй
+            </small>
+            <hr>
+            <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="formData.invalid"
+            >
+                Submit
+            </button>
+        </form>
     </div>
 </div>

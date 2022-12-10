@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { ILogin } from 'src/app/interfaces/ILogin';
 
 @Component({
     selector: 'app-login',
     templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss']
+    styleUrls: ['./login.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent implements OnInit {
     public formData!: FormGroup;
@@ -20,22 +22,29 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {
         this.formData = new FormGroup({
-            email: new FormControl('admin'),
-            password: new FormControl('admin'),
+            email: new FormControl(null, [Validators.required, Validators.email]),
+            password: new FormControl(null, [Validators.required, Validators.minLength(5)]),
+            agreement: new FormControl(null, [Validators.requiredTrue]),
         });
     }
 
-    onClickSubmit(data: any) {
-        const email: string = data.userName;
-        const password: string = data.password;
+    onSubmit() {
+        if (this.formData.invalid) {
+            return;
+        }
 
-        console.log(`Login page: ${email}`);
-        console.log(`Login page: ${password}`);
+        const loginForm: ILogin = {
+            email: this.formData.value?.email,
+            password: this.formData.value?.password,
+        };
 
-        this.authService.login(email, password).subscribe(data => {
+        console.log(`Login page: ${loginForm.email}`);
+        console.log(`Login page: ${loginForm.password}`);
+
+        this.authService.login(loginForm.email, loginForm.password).subscribe(data => {
             console.log("Is Login Success: " + data);
             if (data) {
-                this.router.navigate(['/home']);
+                this.router.navigate(['/users']);
             }
         });
     }
