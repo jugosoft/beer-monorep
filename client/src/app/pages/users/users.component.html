@@ -26,7 +26,7 @@
       <router-outlet></router-outlet>
     </ng-container>
     <ng-container *ngIf="isNew">
-      <app-user-form (onSubmit)="onSubmit($event)"></app-user-form>
+      <app-user-form (onSubmit)="submitUser($any($event))"></app-user-form>
     </ng-container>
   </div>
 </div>

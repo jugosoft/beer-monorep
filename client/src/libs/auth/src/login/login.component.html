@@ -1,0 +1,72 @@
+<div>
+    <div
+        class="alert"
+        [ngClass]="{'alert-danger': 
+        formData.get('email')?.touched && 
+        formData.get('email')?.invalid || 
+        formData.get('password')?.touched && 
+        formData.get('password')?.invalid || 
+        formData.get('agreement')?.touched && 
+        formData.get('agreement')?.invalid}"
+    >
+        <form
+            [formGroup]="formData"
+            (ngSubmit)="onLocalLoginSubmit()"
+        >
+            <div class="form-group">
+                <label>Ваш Email</label>
+                <input
+                    type="email"
+                    class="form-control"
+                    formControlName="email"
+                    placeholder="Ваш Email"
+                >
+                <small
+                    class="form-text text-muted"
+                    *ngIf="formData.get('email')?.touched && formData.get('email')?.errors?.['required']"
+                >
+                    Укажи мэйл, сука
+                </small>
+                <small
+                    class="form-text text-muted"
+                    *ngIf="formData.get('email')?.touched && formData.get('email')?.errors?.['email']"
+                >
+                    Укажи мэйл корректно, сука
+                </small>
+            </div>
+            <div class="form-group">
+                <label>Пароль</label>
+                <input
+                    type="password"
+                    class="form-control"
+                    formControlName="password"
+                    placeholder="Пароль"
+                >
+            </div>
+            <small
+                class="form-text text-muted"
+                *ngIf="formData.get('email')?.touched && formData.get('password')?.errors?.['required']"
+            >
+                Укажи пароль, сука
+            </small>
+            <hr>
+            <button
+                type="submit"
+                class="btn btn-primary"
+                [disabled]="formData.invalid"
+            >
+                Войти
+            </button>
+            <span>
+                <label for="login">Ещё не с нами?</label>
+                <button
+                    id="login"
+                    class="btn btn-primary"
+                    [routerLink]="['/auth', 'register']"
+                >
+                    Зарегистрироваться
+                </button>
+            </span>
+        </form>
+    </div>
+</div>

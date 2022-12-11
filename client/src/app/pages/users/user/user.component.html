@@ -26,6 +26,6 @@
   </ng-container>
   <ng-container *ngIf="isChange">
     <button class="btn btn-primary" (click)="isChange = !isChange">Назат</button>
-    <app-user-form [user]="user" (onSubmit)="onSubmit($event)"></app-user-form>
+    <app-user-form [user]="user" (onSubmit)="onSubmit($any($event))"></app-user-form>
   </ng-container>
 </div>

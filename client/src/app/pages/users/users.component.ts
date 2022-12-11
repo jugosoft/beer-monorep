@@ -15,7 +15,7 @@ import { UsersService } from './users.service';
 })
 export class UsersComponent implements OnInit {
   users$?: Observable<IUser[]>;
-  isNew: boolean = false;
+  isNew = false;
 
   constructor(
     private readonly usersService: UsersService,
@@ -30,7 +30,7 @@ export class UsersComponent implements OnInit {
     this.isNew = !this.isNew;
   }
 
-  onSubmit(user: IUser) {
+  submitUser(user: IUser) {
     const { email, name, password } = user;
     this.usersService.createUser(name, email, password).subscribe(user => {
       if (user) {

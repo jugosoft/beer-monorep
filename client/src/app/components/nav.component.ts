@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { IMenu } from '../interfaces';
 
 @Component({
-    selector: 'app-nav',
-    template: `
+  selector: 'app-nav',
+  template: `
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">BeerApp</a>
@@ -19,7 +19,7 @@ import { IMenu } from '../interfaces';
                         routerLinkActive="active"
                         [routerLinkActiveOptions]="{exact: true}"
                     >   
-                      <app-icon [icon]="m.icon"></app-icon>
+                      <app-icon [icon]="m.icon || 'bi bi-user'"></app-icon>
                       {{ m.title }}
                     </a>
                 </li>
@@ -34,13 +34,14 @@ import { IMenu } from '../interfaces';
     `
 })
 export class NavComponent {
-    menu?: IMenu[];
+  menu?: IMenu[];
 
-    constructor() {
-        this.menu = [
-            { id: 1, title: 'Main', href: '/', icon: 'bi bi-people' },
-            { id: 1, title: 'Users', href: '/users', icon: 'bi bi-ticket-detailed' },
-            { id: 1, title: 'About', href: '/about', icon: 'bi bi-app-indicator' },
-        ];
-    }
+  constructor() {
+    this.menu = [
+      { id: 1, title: 'Main', href: '/', icon: 'bi bi-people' },
+      { id: 2, title: 'Users', href: '/users', icon: 'bi bi-ticket-detailed' },
+      { id: 3, title: 'About', href: '/about', icon: 'bi bi-app-indicator' },
+      { id: 4, title: 'Logout', href: '/auth/logout', icon: 'bi bi-app-indicator' },
+    ];
+  }
 }

@@ -9,5 +9,5 @@ import { Component, Input } from '@angular/core'
   `,
 })
 export class IconComponent {
-  @Input('icon') icon?: string
+  @Input() icon!: string
 }
