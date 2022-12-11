@@ -16,7 +16,7 @@
             (ngSubmit)="onLocalRegisterSubmit()"
         >
             <div class="form-group">
-                <label>Email address</label>
+                <label>Ваш Email</label>
                 <input
                     type="email"
                     class="form-control"
@@ -91,9 +91,9 @@
             </div>
             <small
                 class="form-text text-muted"
-                *ngIf="!formData.get('agreement')?.touched && formData.get('agreement')?.errors?.['required']"
+                *ngIf="formData.get('agreement')?.touched && formData.get('agreement')?.errors?.['required']"
             >
-                Нужно согласиться, брата(несса)н
+                Нужно согласиться, брат(анесса)
             </small>
             <hr>
             <button

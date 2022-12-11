@@ -14,12 +14,12 @@
             (ngSubmit)="onLocalLoginSubmit()"
         >
             <div class="form-group">
-                <label>Email address</label>
+                <label>Ваш Email</label>
                 <input
                     type="email"
                     class="form-control"
                     formControlName="email"
-                    placeholder="Enter email"
+                    placeholder="Ваш Email"
                 >
                 <small
                     class="form-text text-muted"
@@ -35,12 +35,12 @@
                 </small>
             </div>
             <div class="form-group">
-                <label>Password</label>
+                <label>Пароль</label>
                 <input
                     type="password"
                     class="form-control"
                     formControlName="password"
-                    placeholder="Password"
+                    placeholder="Пароль"
                 >
             </div>
             <small
@@ -49,34 +49,13 @@
             >
                 Укажи пароль, сука
             </small>
-            <small
-                class="form-text text-muted"
-                *ngIf="formData.get('email')?.touched && formData.get('password')?.errors?.['minlength']"
-            >
-                Минимальная длина пароля - {{formData.get('password')?.errors?.['minlength']?.requiredLength}}
-          символов, сука. Сейчас {{formData.get('password')?.errors?.['minlength']?.actualLength}}
-            </small>
-            <div class="form-check">
-                <input
-                    type="checkbox"
-                    class="form-check-input"
-                    formControlName="agreement"
-                >
-                <label class="form-check-label">Go fuck urself</label>
-            </div>
-            <small
-                class="form-text text-muted"
-                *ngIf="!formData.get('agreement')?.touched && formData.get('agreement')?.errors?.['required']"
-            >
-                Согласие идти на хуй
-            </small>
             <hr>
             <button
                 type="submit"
                 class="btn btn-primary"
                 [disabled]="formData.invalid"
             >
-                Submit
+                Войти
             </button>
             <span>
                 <label for="login">Ещё не с нами?</label>
