@@ -103,6 +103,16 @@
             >
                 Зарегистрироваться
             </button>
+            <span>
+                <label for="login">Уже есть аккаунт?</label>
+                <button
+                    id="login"
+                    class="btn btn-primary"
+                    [routerLink]="['/auth', 'login']"
+                >
+                    Войти
+                </button>
+            </span>
         </form>
     </div>
 </div>

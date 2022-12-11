@@ -52,7 +52,7 @@
             <small
                 class="form-text text-muted"
                 *ngIf="formData.get('email')?.touched && formData.get('password')?.errors?.['minlength']"
-            >   
+            >
                 Минимальная длина пароля - {{formData.get('password')?.errors?.['minlength']?.requiredLength}}
           символов, сука. Сейчас {{formData.get('password')?.errors?.['minlength']?.actualLength}}
             </small>
@@ -78,6 +78,16 @@
             >
                 Submit
             </button>
+            <span>
+                <label for="login">Ещё не с нами?</label>
+                <button
+                    id="login"
+                    class="btn btn-primary"
+                    [routerLink]="['/auth', 'register']"
+                >
+                    Зарегистрироваться
+                </button>
+            </span>
         </form>
     </div>
 </div>
