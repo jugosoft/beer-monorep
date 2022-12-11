@@ -9,9 +9,9 @@ import { UsersService } from '../users.service';
   styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
-  imgMock: string = 'https://100k-faces.glitch.me/random-image';
+  imgMock = 'https://100k-faces.glitch.me/random-image';
   user$!: Observable<IUser>;
-  isChange: boolean = false;
+  isChange = false;
 
   constructor(
     private readonly usersService: UsersService,
@@ -38,6 +38,6 @@ export class UserComponent implements OnInit {
   }
 
   onSubmit(user: IUser) {
-    
+    return;
   }
 }

@@ -15,12 +15,12 @@ import { IUser } from 'src/app/interfaces/IUser';
         <label for="email" class="form-label">Email</label>
         <input type="email" id="email" class="form-control" formControlName="email">
       </div>
-      <input type="number" [value]="user?.id" hidden>
+      <input type="number" [value]="user.id" hidden>
       <div class="mb-3">
         <label for="password" class="form-label">Password</label>
         <input type="password" id="password" class="form-control" formControlName="password">
       </div>
-      <input type="password" [value]="user?.id" hidden>
+      <input type="password" [value]="user.password" hidden>
       <button
         class="btn btn-primary"
         (click)="submit()"
@@ -32,8 +32,8 @@ import { IUser } from 'src/app/interfaces/IUser';
   `,
 })
 export class UserFormComponent implements OnInit {
-  @Input('user') user: IUser | null = null
-  @Output() onSubmit: EventEmitter<IUser> = new EventEmitter<IUser>()
+  @Input() user!: IUser;
+  @Output() submitUser: EventEmitter<IUser> = new EventEmitter<IUser>()
   form: FormGroup = new FormGroup({})
   btnTitle?: string
 
@@ -47,7 +47,7 @@ export class UserFormComponent implements OnInit {
   }
 
   submit() {
-    this.onSubmit.emit({
+    this.submitUser.emit({
       ...this.form.value,
       id: this.user?.id,
     })
