@@ -9,7 +9,6 @@ import { IconModule } from './components/icon/icon.module';
 import { NavComponent } from './components/nav.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
-import { AuthModule } from 'src/libs/auth';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('ACCESS_TOKEN_KEY');
@@ -23,7 +22,6 @@ export function tokenGetter(): string | null {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AuthModule,
     IconModule,
     GraphQLModule,
     HttpClientModule,
