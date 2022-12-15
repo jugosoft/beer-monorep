@@ -1,1 +1,1 @@
-export * from './src/mock-api.module';
+export * from './src';

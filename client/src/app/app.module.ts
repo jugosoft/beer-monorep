@@ -12,29 +12,29 @@ import { environment } from 'src/environments/environment';
 import { MockApiModule } from 'src/libs/mock-api';
 
 export function tokenGetter(): string | null {
-  return localStorage.getItem('ACCESS_TOKEN_KEY');
+	return localStorage.getItem('ACCESS_TOKEN_KEY');
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    IconModule,
-    GraphQLModule,
-    HttpClientModule,
-    MockApiModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter,
-        allowedDomains: environment.tokenWhiteListedDomains,
-      }
-    })
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent,
+		NavComponent,
+	],
+	imports: [
+		BrowserModule,
+		AppRoutingModule,
+		IconModule,
+		GraphQLModule,
+		HttpClientModule,
+		MockApiModule,
+		JwtModule.forRoot({
+			config: {
+				tokenGetter,
+				allowedDomains: environment.tokenWhiteListedDomains,
+			}
+		})
+	],
+	providers: [],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }
