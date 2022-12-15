@@ -13,7 +13,7 @@ export class MainComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.apiPosts.getAllPosts().subscribe(data => {
+        this.apiPosts.getAllPosts().subscribe((data) => {
             console.log(data);
         });
     }
