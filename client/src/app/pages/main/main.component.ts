@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { ApiPostsService } from 'src/libs/mock-api/src/api-posts.service';
 
 @Component({
   selector: 'app-main',
@@ -7,7 +8,13 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MainComponent implements OnInit {
-  constructor() { }
+  constructor(
+    private readonly apiPosts: ApiPostsService
+  ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.apiPosts.getAllPosts().subscribe(data => {
+      console.log(data);
+    });
+   }
 }

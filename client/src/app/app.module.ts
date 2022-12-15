@@ -9,6 +9,7 @@ import { IconModule } from './components/icon/icon.module';
 import { NavComponent } from './components/nav.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
+import { MockApiModule } from 'src/libs/mock-api';
 
 export function tokenGetter(): string | null {
   return localStorage.getItem('ACCESS_TOKEN_KEY');
@@ -25,6 +26,7 @@ export function tokenGetter(): string | null {
     IconModule,
     GraphQLModule,
     HttpClientModule,
+    MockApiModule,
     JwtModule.forRoot({
       config: {
         tokenGetter,
