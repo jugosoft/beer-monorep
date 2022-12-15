@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ApiPostsService } from 'src/libs';
+import { ApiPostsService } from 'src/libs/api';
 
 @Component({
     selector: 'app-main',
@@ -13,7 +13,7 @@ export class MainComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
-        this.apiPosts.getAllPosts().subscribe((data) => {
+        this.apiPosts.getPosts().subscribe(data => {
             console.log(data);
         });
     }

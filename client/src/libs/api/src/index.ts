@@ -1,3 +1,3 @@
-export * from './posts/api-posts.service';
+export * from './posts';
 export * from './api.module';
 export * from './interfaces';
