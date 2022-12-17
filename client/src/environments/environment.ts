@@ -1,4 +1,9 @@
-import { ApiPostsService, MockApiPostsService } from "src/libs/api";
+import { 
+    ApiPostsService, 
+    MockApiPostsService, 
+    ApiUsersService,
+    MockApiUsersService 
+} from 'src/libs/api';
 
 export const environment = {
     production: false,
@@ -6,5 +11,7 @@ export const environment = {
     tokenWhiteListedDomains: ['localhost:3001', 'localhost:4200'],
     providers: [{
         provide: ApiPostsService, useClass: MockApiPostsService
+    }, {
+        provide: ApiUsersService, useClass: MockApiUsersService
     }],
 };

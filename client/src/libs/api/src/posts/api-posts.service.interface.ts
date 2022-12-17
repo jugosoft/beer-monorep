@@ -1,5 +1,5 @@
-import { Observable } from "rxjs";
-import { IPost } from "../interfaces";
+import { Observable } from 'rxjs';
+import { IPost } from 'src/libs/interfaces';
 
 
 export interface IPostService {
