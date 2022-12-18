@@ -29,11 +29,6 @@ export class UsersComponent implements OnInit {
         this.isNew = !this.isNew;
     }
 
-    gotoUser(userId: Guid): void {
-        this.isNew = false;
-        this.router.navigate(['/users', userId]);
-    }
-
     submitUser(user: IUser): void {
         this.usersService.addUser(user).subscribe(user => {
             if (user) {
