@@ -33,7 +33,7 @@ export class UsersComponent implements OnInit {
         this.usersService.addUser(user).subscribe(user => {
             if (user) {
                 this.isNewTrigger();
-                this.router.navigate(['/users', user.id]);
+                this.router.navigate(['/users', user.id.toString()]);
             }
         })
     }
