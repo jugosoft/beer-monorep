@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { Guid } from 'guid-typescript';
 import { Observable, of } from 'rxjs';
 
+import { IPost, IPostAbstract } from 'src/libs/interfaces';
 import { ApiModule } from '../api.module';
-import { IPost, IPostAbstract } from '../interfaces';
 import { IPostService } from './api-posts.service.interface';
 
 const posts: IPost[] = [{

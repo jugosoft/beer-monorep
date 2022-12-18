@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { tap, delay } from 'rxjs/operators';
+import { ApiUsersService } from 'src/libs/api';
+import { IUser } from 'src/libs/interfaces';
+import { AuthModule } from './auth.module';
 
 
 @Injectable({
@@ -8,12 +11,22 @@ import { tap, delay } from 'rxjs/operators';
 })
 export class AuthService {
     isUserLoggedIn: boolean = false;
+    user!: IUser;
+
+    constructor(
+        private readonly usersService: ApiUsersService
+    ) { }
 
     localLogin(email: string, password: string): Observable<boolean> {
-        console.log(email);
-        console.log(password);
-        this.isUserLoggedIn = email == 'admin@mail.ru' && password == 'admin';
-        localStorage.setItem('isUserLoggedIn', this.isUserLoggedIn ? "true" : "false");
+        this.usersService.getUserByEmail(email).subscribe(user => {
+            this.user = user;
+        });
+
+        if (this.user.email === email &&
+            this.user.password === password) {
+            this.isUserLoggedIn = true;
+            localStorage.setItem('isUserLoggedIn', this.isUserLoggedIn.toString());
+        }
 
         return of(this.isUserLoggedIn).pipe(
             delay(1000),
@@ -27,7 +40,7 @@ export class AuthService {
         console.log(email);
         console.log(password);
         console.log(username);
-        
+
         this.isUserLoggedIn = email == 'admin@mail.ru' && password == 'admin';
         localStorage.setItem('isUserLoggedIn', this.isUserLoggedIn ? "true" : "false");
 
@@ -40,6 +53,4 @@ export class AuthService {
         this.isUserLoggedIn = false;
         localStorage.removeItem('isUserLoggedIn');
     }
-
-    constructor() { }
 }

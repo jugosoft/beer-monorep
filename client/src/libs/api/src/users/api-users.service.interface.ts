@@ -10,5 +10,5 @@ export interface IUserService {
     getUserByEmail(email: string): Observable<IUser>;
     addUser(newUser: IUser): Observable<IUser>;
     updateUser(userToUpdate: IUser): Observable<IUser>;
-    deleteUser(userId: number): Observable<number | undefined>;
+    deleteUser(userId: Guid): Observable<number | undefined>;
 }

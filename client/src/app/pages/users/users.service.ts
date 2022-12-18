@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
+import { Guid } from 'guid-typescript';
 import { map, Observable } from 'rxjs';
 import { IUser } from 'src/app/interfaces/IUser';
 import { ICREATE_USER, CREATE_USER } from './gql/create-user';
@@ -27,7 +28,7 @@ export class UsersService {
       );
   }
 
-  getOneUser(id: number): Observable<IUser> {
+  getOneUser(id: Guid): Observable<IUser> {
     return this.apollo.watchQuery<IGET_ONE_USER>({
       query: GET_ONE_USER,
       variables: {
@@ -52,7 +53,7 @@ export class UsersService {
     }).pipe(map(({ data }) => data?.createUser));
   }
 
-  updateUser(id: number, name: string, email: string): Observable<IUser | undefined> {
+  updateUser(id: Guid, name: string, email: string): Observable<IUser | undefined> {
     return this.apollo.mutate<IUPDATE_USER>({
       mutation: UPDATE_USER,
       variables: {
@@ -64,7 +65,7 @@ export class UsersService {
     }).pipe(map(({ data }) => data?.updateUser));
   }
 
-  deleteUser(id: number): Observable<number | undefined> {
+  deleteUser(id: Guid): Observable<number | undefined> {
     return this.apollo.mutate<IDELETE_USER>({
       mutation: DELETE_USER,
       variables: {

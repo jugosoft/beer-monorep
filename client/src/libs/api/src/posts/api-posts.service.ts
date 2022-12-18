@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import { IPost } from 'src/libs/interfaces';
 import { ApiModule } from '../api.module';
-import { IPost } from '../interfaces';
 import { IPostService } from './api-posts.service.interface';
 
 

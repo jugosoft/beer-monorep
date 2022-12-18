@@ -1,8 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Guid } from 'guid-typescript';
 import { Observable } from 'rxjs';
 import { IUser } from 'src/app/interfaces/IUser';
-import { UsersService } from '../users.service';
+import { ApiUsersService } from 'src/libs/api';
 
 @Component({
   templateUrl: './user.component.html',
@@ -14,7 +15,7 @@ export class UserComponent implements OnInit {
   isChange = false;
 
   constructor(
-    private readonly usersService: UsersService,
+    private readonly usersService: ApiUsersService,
     private readonly route: ActivatedRoute,
     private readonly cdr: ChangeDetectorRef,
     private readonly router: Router,
@@ -22,7 +23,7 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(({ id }) => {
-      if (id) this.user$ = this.usersService.getOneUser(id);
+      if (id) this.user$ = this.usersService.getUserById(id);
       this.cdr.detectChanges();
     })
   }
@@ -31,9 +32,9 @@ export class UserComponent implements OnInit {
     this.isChange = !this.isChange;
   }
 
-  delete(id: number) {
+  delete(id: Guid) {
     this.usersService.deleteUser(id).subscribe(() => {
-      this.router.navigate(['/users'])
+      this.router.navigate(['/users']);
     });
   }
 

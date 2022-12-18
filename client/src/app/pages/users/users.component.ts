@@ -1,42 +1,45 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Apollo } from 'apollo-angular';
-import { map, Observable } from 'rxjs';
-import { IUser } from 'src/app/interfaces/IUser';
-import { GET_ALL_USERS, IGET_ALL_USERS } from './gql/get-all-users';
-import { UsersService } from './users.service';
+import { Guid } from 'guid-typescript';
+import { Observable } from 'rxjs';
+import { ApiUsersService } from 'src/libs/api';
+import { IUser } from 'src/libs/interfaces';
 
 
 @Component({
-  selector: 'app-main',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-main',
+    templateUrl: './users.component.html',
+    styleUrls: ['./users.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersComponent implements OnInit {
-  users$?: Observable<IUser[]>;
-  isNew = false;
+    users$?: Observable<IUser[]>;
+    isNew = false;
 
-  constructor(
-    private readonly usersService: UsersService,
-    private readonly router: Router,
-  ) { }
+    constructor(
+        private readonly usersService: ApiUsersService,
+        private readonly router: Router
+    ) { }
 
-  ngOnInit(): void {
-    this.users$ = this.usersService.getAllUsers();
-  }
+    ngOnInit(): void {
+        this.users$ = this.usersService.getUsers();
+    }
 
-  isNewTrigger(): void {
-    this.isNew = !this.isNew;
-  }
+    isNewTrigger(): void {
+        this.isNew = !this.isNew;
+    }
 
-  submitUser(user: IUser) {
-    const { email, name, password } = user;
-    this.usersService.createUser(name, email, password).subscribe(user => {
-      if (user) {
-        this.isNewTrigger();
-        this.router.navigate(['/users', user.id]);
-      }
-    })
-  }
+    gotoUser(userId: Guid): void {
+        this.isNew = false;
+        this.router.navigate(['/users', userId]);
+    }
+
+    submitUser(user: IUser): void {
+        this.usersService.addUser(user).subscribe(user => {
+            if (user) {
+                this.isNewTrigger();
+                this.router.navigate(['/users', user.id]);
+            }
+        })
+    }
 }

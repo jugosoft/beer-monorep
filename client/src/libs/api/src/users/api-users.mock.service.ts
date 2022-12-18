@@ -21,7 +21,7 @@ const users: IUser[] = [{
 })
 export class ApiUsersService implements IUserService {
     getUserById(userId: Guid): Observable<IUser> {
-        const user = users.filter(user => user.id === userId).pop();
+        const user = users.filter(user => user.id.equals(userId)).pop();
         if (!user) {
             throw new Error('Пользователь с указанным ID не зарегистрирован');
         }
@@ -60,7 +60,7 @@ export class ApiUsersService implements IUserService {
         throw new Error('Method not implemented.');
     }
 
-    deleteUser(userId: number): Observable<number | undefined> {
+    deleteUser(userId: Guid): Observable<number | undefined> {
         throw new Error('Method not implemented.');
     }
 }
