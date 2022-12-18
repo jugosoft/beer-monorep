@@ -9,7 +9,6 @@
 
         <div class="list-group">
             <a *ngFor="let user of users" class="list-group-item list-group-item-action" [routerLink]="['/users', user.id.toString()]">
-                <!-- (click)="gotoUser(user.id)"> -->
                 {{ user.name }}
             </a>
         </div>

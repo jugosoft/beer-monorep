@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Guid } from 'guid-typescript';
 import { Observable } from 'rxjs';
+
 import { ApiUsersService } from 'src/libs/api';
 import { IUser } from 'src/libs/interfaces';
 
