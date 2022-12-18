@@ -3,6 +3,6 @@
     <div class="card-body">
         <h4 class="card-title">{{post.author}}</h4>
         <p class="card-text">{{post.abstracts.length ? post.abstracts[0].text : ''}}</p>
-        <a href="#" class="btn btn-primary">Прочесть</a>
+        <button (click)="gotoPostDetails(post.id)" class="btn btn-primary">Прочесть</button>
     </div>
 </div>

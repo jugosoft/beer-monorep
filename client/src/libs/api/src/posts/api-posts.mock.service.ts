@@ -9,6 +9,7 @@ import { IPostService } from './api-posts.service.interface';
 const posts: IPost[] = [{
     id: Guid.parse('ac1cc22f-7f4f-4840-b70d-05448aaa81a6'),
     author: 'diman',
+    title: 'Заголовок интересный',
     abstracts: [{
         id: Guid.parse('1b93418e-e0fe-4b90-a39d-f73e99b72684'),
         postId: Guid.parse('ac1cc22f-7f4f-4840-b70d-05448aaa81a6'),
@@ -25,6 +26,7 @@ const posts: IPost[] = [{
 }, {
     id: Guid.parse('bc1cc22f-7f4f-4840-b70d-05448aaa81a6'),
     author: 'diman',
+    title: 'Заголовок ещё интереснее',
     abstracts: [{
         id: Guid.parse('1b93418e-e0fe-4b90-a39d-f73e99b72684'),
         postId: Guid.parse('bc1cc22f-7f4f-4840-b70d-05448aaa81a6'),

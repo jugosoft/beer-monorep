@@ -10,6 +10,7 @@ export interface IPostAbstract {
 export interface IPost {
     id: Guid;
     author: string;
+    title: string;
     abstracts: IPostAbstract[];
     createdAt: Date;
     updatedAt: Date;

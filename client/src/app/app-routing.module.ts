@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/libs/auth/src/auth.guard';
 
 const routes: Routes = [{
-    path: '',
-    pathMatch: 'full',
+    path: 'posts',
     loadChildren: () => import('src/libs/posts').then(m => m.PostsModule)
 }, {
     path: 'auth',
@@ -17,12 +16,16 @@ const routes: Routes = [{
     path: 'about',
     loadChildren: async () => (await import('./pages/about/about.module')).AboutModule
 }, {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'posts'
+}, {
     path: '**', redirectTo: '/'
 }];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes, {
-        // preloadingStrategy: PreloadAllModules,
+        preloadingStrategy: PreloadAllModules
     })],
     exports: [RouterModule],
 })
