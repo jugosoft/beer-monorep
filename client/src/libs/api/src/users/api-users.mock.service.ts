@@ -21,7 +21,7 @@ const users: IUser[] = [{
 })
 export class ApiUsersService implements IUserService {
     getUserById(userId: Guid): Observable<IUser> {
-        const user = users.filter(user => user.id.equals(userId)).pop();
+        const user = users.filter(user => user.id?.equals(userId)).pop();
         if (!user) {
             throw new Error('Пользователь с указанным ID не зарегистрирован');
         }
@@ -53,7 +53,10 @@ export class ApiUsersService implements IUserService {
             throw new Error('Невалидный пользователь');
         }
 
-        return of(newUser);
+        const registeredUser: IUser = {...newUser, id: Guid.create()};
+        users.push(registeredUser);
+        
+        return of(registeredUser);
     }
 
     updateUser(userToUpdate: IUser): Observable<IUser> {

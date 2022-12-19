@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Guid } from 'guid-typescript';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { tap, delay } from 'rxjs/operators';
 import { ApiUsersService } from 'src/libs/api';
@@ -15,7 +16,7 @@ export class AuthService {
 
     constructor(
         private readonly usersService: ApiUsersService,
-        private readonly activatedRoute: ActivatedRoute
+        private readonly router: Router
     ) {
         const localStorageToken = localStorage.getItem('isUserLoggedIn');
         if (!localStorageToken) {
@@ -23,7 +24,6 @@ export class AuthService {
         }
         const isUserLoggedIn = localStorageToken === 'true' ? true : false;
         this.userLoggedIn.next(isUserLoggedIn);
-        console.log(activatedRoute);
     }
 
     get isUserLoggedIn(): Observable<boolean> {
@@ -43,31 +43,44 @@ export class AuthService {
             });
         }
 
+        this.router.navigate(['/posts']);
+
         return this.isUserLoggedIn.pipe(
             delay(500)
         );
     }
 
     localRegister(email: string, username: string, password: string): Observable<boolean> {
-        console.log(email);
-        console.log(password);
-        console.log(username);
-
-        if (email == 'admin@mail.ru' && password == 'admin') {
-            this.userLoggedIn.next(true);
+        if (!email || !username || !password) {
+            return of(false);
         }
+  
+        this.usersService.addUser({
+            email: email,
+            name: username,
+            password: password,
+            hashedRT: '',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        }).subscribe(newUser => {
+            if (newUser) {
+                this.userLoggedIn.next(true);
+                this.router.navigate(['/posts']);
+            }
+        });
 
         this.isUserLoggedIn.subscribe(value => {
             localStorage.setItem('isUserLoggedIn', value.toString());
         });
-        
+
         return this.userLoggedIn.pipe(
-            delay(1000)
+            delay(3000)
         );
     }
 
     logout(): void {
         this.userLoggedIn.next(false);
+        this.router.navigate(['/posts']);
         localStorage.removeItem('isUserLoggedIn');
     }
 }
