@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { AuthService } from 'src/libs/auth';
 import { IMenu } from '../interfaces';
 
 @Component({
-  selector: 'app-nav',
-  template: `
+    selector: 'app-nav',
+    changeDetection: ChangeDetectionStrategy.OnPush,
+    template: `
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">BeerApp</a>
@@ -33,15 +35,27 @@ import { IMenu } from '../interfaces';
       </nav>
     `
 })
-export class NavComponent {
-  menu?: IMenu[];
+export class NavComponent implements OnInit {
+    menu!: IMenu[];
+    isLoggedIn!: boolean;
 
-  constructor() {
-    this.menu = [
-      { id: 1, title: 'Main', href: '/', icon: 'bi bi-people' },
-      { id: 2, title: 'Users', href: '/users', icon: 'bi bi-ticket-detailed' },
-      { id: 3, title: 'About', href: '/about', icon: 'bi bi-app-indicator' },
-      { id: 4, title: 'Logout', href: '/auth/logout', icon: 'bi bi-app-indicator' },
-    ];
-  }
+    constructor(
+        private readonly authService: AuthService
+    ) { 
+        this.menu = [
+            { id: 1, title: 'Главная', href: '/', icon: 'bi bi-people' },
+            // { id: 2, title: 'Пользователи', href: '/users', icon: 'bi bi-ticket-detailed' },
+            { id: 2, title: 'Про нас', href: '/about', icon: 'bi bi-app-indicator' }
+        ];
+    }
+
+    ngOnInit(): void {
+        this.authService.isUserLoggedIn.subscribe(value => {
+            if (value) {
+                this.menu[2] = { id: 3, title: 'Выйти', href: '/auth/logout', icon: 'bi bi-app-register' };
+            } else {
+                this.menu[2] = { id: 4, title: 'Войти', href: '/auth/login', icon: 'bi bi-app-login' };
+            }
+        })
+    }
 }

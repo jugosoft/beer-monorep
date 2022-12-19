@@ -4,14 +4,14 @@ import { AuthGuard } from 'src/libs/auth/src/auth.guard';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { PostsComponent } from './posts.component';
 
-const routes: Routes = [
-    {
-        path: '',
-        component: PostsComponent,
-    }, {
-        path: ':id', canActivate: [AuthGuard], component: PostDetailsComponent
-    }
-];
+const routes: Routes = [{
+    path: '',
+    component: PostsComponent,
+}, {
+    path: ':id', canActivate: [AuthGuard], component: PostDetailsComponent
+}, {
+    path: '**', redirectTo: '/'
+}];
 
 @NgModule({
     imports: [RouterModule.forChild(routes)],

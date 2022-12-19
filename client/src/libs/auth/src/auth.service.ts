@@ -1,21 +1,34 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { tap, delay } from 'rxjs/operators';
 import { ApiUsersService } from 'src/libs/api';
 import { IUser } from 'src/libs/interfaces';
-import { AuthModule } from './auth.module';
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    isUserLoggedIn: boolean = false;
     user!: IUser;
+    userLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
     constructor(
-        private readonly usersService: ApiUsersService
-    ) { }
+        private readonly usersService: ApiUsersService,
+        private readonly activatedRoute: ActivatedRoute
+    ) {
+        const localStorageToken = localStorage.getItem('isUserLoggedIn');
+        if (!localStorageToken) {
+            return;
+        }
+        const isUserLoggedIn = localStorageToken === 'true' ? true : false;
+        this.userLoggedIn.next(isUserLoggedIn);
+        console.log(activatedRoute);
+    }
+
+    get isUserLoggedIn(): Observable<boolean> {
+        return this.userLoggedIn.asObservable();
+    }
 
     localLogin(email: string, password: string): Observable<boolean> {
         this.usersService.getUserByEmail(email).subscribe(user => {
@@ -24,15 +37,14 @@ export class AuthService {
 
         if (this.user.email === email &&
             this.user.password === password) {
-            this.isUserLoggedIn = true;
-            localStorage.setItem('isUserLoggedIn', this.isUserLoggedIn.toString());
+            this.userLoggedIn.next(true);
+            this.isUserLoggedIn.subscribe(value => {
+                localStorage.setItem('isUserLoggedIn', value.toString());
+            });
         }
 
-        return of(this.isUserLoggedIn).pipe(
-            delay(1000),
-            tap(val => {
-                alert('Is User Authentication is successful');
-            })
+        return this.isUserLoggedIn.pipe(
+            delay(500)
         );
     }
 
@@ -41,16 +53,21 @@ export class AuthService {
         console.log(password);
         console.log(username);
 
-        this.isUserLoggedIn = email == 'admin@mail.ru' && password == 'admin';
-        localStorage.setItem('isUserLoggedIn', this.isUserLoggedIn ? "true" : "false");
+        if (email == 'admin@mail.ru' && password == 'admin') {
+            this.userLoggedIn.next(true);
+        }
 
-        return of(this.isUserLoggedIn).pipe(
+        this.isUserLoggedIn.subscribe(value => {
+            localStorage.setItem('isUserLoggedIn', value.toString());
+        });
+        
+        return this.userLoggedIn.pipe(
             delay(1000)
         );
     }
 
     logout(): void {
-        this.isUserLoggedIn = false;
+        this.userLoggedIn.next(false);
         localStorage.removeItem('isUserLoggedIn');
     }
 }
