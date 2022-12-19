@@ -14,11 +14,13 @@ const posts: IPost[] = [{
         id: Guid.parse('1b93418e-e0fe-4b90-a39d-f73e99b72684'),
         postId: Guid.parse('ac1cc22f-7f4f-4840-b70d-05448aaa81a6'),
         order: 0,
+        title: 'Название абзаца',
         text: 'lorem ipusm dolor sit amet mothefucka'
     }, {
         id: Guid.parse('8cbdc49f-4013-42ba-a33e-714b3f3960a6'),
         postId: Guid.parse('ac1cc22f-7f4f-4840-b70d-05448aaa81a6'),
-        order: 0,
+        order: 1,
+        title: 'Предыстория',
         text: 'lorem ipusm dolor sit amet mothefucka 222'
     }],
     createdAt: new Date(),
@@ -31,11 +33,13 @@ const posts: IPost[] = [{
         id: Guid.parse('1b93418e-e0fe-4b90-a39d-f73e99b72684'),
         postId: Guid.parse('bc1cc22f-7f4f-4840-b70d-05448aaa81a6'),
         order: 0,
+        title: 'Как мы докатились до этого',
         text: 'lorem ipusm dolor sit amet mothefucka'
     }, {
         id: Guid.parse('8cbdc49f-4013-42ba-a33e-714b3f3960a6'),
         postId: Guid.parse('bc1cc22f-7f4f-4840-b70d-05448aaa81a6'),
-        order: 0,
+        order: 1,
+        title: 'Мне чисто хочется проверить сортировку',
         text: 'lorem ipusm dolor sit amet mothefucka 222'
     }],
     createdAt: new Date(),

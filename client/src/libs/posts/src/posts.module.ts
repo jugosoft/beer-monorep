@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { PostsComponent } from './posts.component';
 import { PostComponent } from './post/post.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
+import { PostsRoutingModule } from './posts-routing.module';
 
 @NgModule({
     declarations: [
@@ -14,14 +15,7 @@ import { PostDetailsComponent } from './post-details/post-details.component';
     ],
     imports: [
         CommonModule,
-        RouterModule.forChild([
-            {
-                path: '',
-                component: PostsComponent,
-            }, {
-                path: ':id', component: PostDetailsComponent
-            }
-        ])
+        PostsRoutingModule
     ],
 })
 export class PostsModule { }

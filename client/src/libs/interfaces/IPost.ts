@@ -4,6 +4,7 @@ export interface IPostAbstract {
     id: Guid;
     postId: Guid;
     order: number;
+    title: string;
     text: string;
 }
 
