@@ -2,7 +2,9 @@ import {
     ApiPostsService, 
     MockApiPostsService, 
     ApiUsersService,
-    MockApiUsersService 
+    MockApiUsersService,
+    ApiBeersService,
+    MockApiBeersService
 } from 'src/libs/api';
 
 export const environment = {
@@ -13,5 +15,7 @@ export const environment = {
         provide: ApiPostsService, useClass: MockApiPostsService
     }, {
         provide: ApiUsersService, useClass: MockApiUsersService
+    }, {
+        provide: ApiBeersService, useClass: MockApiBeersService
     }],
 };

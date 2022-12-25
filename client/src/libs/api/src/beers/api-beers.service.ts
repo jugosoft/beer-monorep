@@ -10,7 +10,7 @@ import { IBeerService } from './api-beers.service.interface';
 @Injectable({
     providedIn: ApiModule
 })
-export class ApiPostsService implements IBeerService {
+export class ApiBeersService implements IBeerService {
     getBeers(): Observable<IBeer[]> {
         throw new Error('Method not implemented.');
     }

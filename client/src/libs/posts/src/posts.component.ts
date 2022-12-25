@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ApiPostsService } from 'src/libs/api';
-import { IPost } from 'src/libs/interfaces';
+import { ApiBeersService, ApiPostsService } from 'src/libs/api';
+import { IBeer, IPost } from 'src/libs/interfaces';
 
 @Component({
     selector: 'app-main',
@@ -9,14 +9,20 @@ import { IPost } from 'src/libs/interfaces';
 })
 export class PostsComponent implements OnInit {
     posts!: IPost[];
+    beers!: IBeer[];
 
     constructor(
-        private readonly apiPosts: ApiPostsService
+        private readonly apiPosts: ApiPostsService,
+        private readonly apiBeers: ApiBeersService
     ) { }
 
     ngOnInit(): void {
         this.apiPosts.getPosts().subscribe(posts => {
             this.posts = posts;
+        });
+        this.apiBeers.getBeers().subscribe(beers => {
+            this.beers = beers;
+            console.log(this.beers);
         });
     }
 }
