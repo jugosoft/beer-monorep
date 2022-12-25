@@ -56,7 +56,7 @@ export class ApiUsersService implements IUserService {
         const registeredUser: IUser = {...newUser, id: Guid.create()};
         users.push(registeredUser);
         
-        return of(registeredUser);
+        return of({...registeredUser, id: Guid.create()});
     }
 
     updateUser(userToUpdate: IUser): Observable<IUser> {
