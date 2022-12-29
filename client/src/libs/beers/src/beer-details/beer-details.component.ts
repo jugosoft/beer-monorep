@@ -1,31 +1,31 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Guid } from 'guid-typescript';
-import { ApiPostsService } from 'src/libs/api';
-import { IPost } from 'src/libs/interfaces';
+import { ApiBeersService } from 'src/libs/api';
+import { IBeer } from 'src/libs/interfaces';
 
 @Component({
-    selector: 'app-post-details',
-    templateUrl: './post-details.component.html',
+    selector: 'app-beer-details',
+    templateUrl: './beer-details.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PostDetailsComponent implements OnInit {
-    post!: IPost;
+export class BeerDetailsComponent implements OnInit {
+    beer!: IBeer;
 
     constructor(
-        private readonly apiPosts: ApiPostsService,
+        private readonly apiBeers: ApiBeersService,
         private readonly router: Router,
         private readonly activatedRoute: ActivatedRoute
     ) { }
 
     ngOnInit(): void {
         this.activatedRoute.params.subscribe(params => {
-            this.apiPosts.getPosts().subscribe(posts => {
-                const postFiltered = posts.filter(post => post.id.equals(Guid.parse(params['id']))).pop();
+            this.apiBeers.getBeers().subscribe(beers => {
+                const postFiltered = beers.filter(beer => beer.id?.equals(Guid.parse(params['id']))).pop();
                 if (postFiltered) {
-                    this.post = postFiltered;
+                    this.beer = postFiltered;
                 } else {
-                    this.router.navigate(['/posts']);
+                    this.router.navigate(['/beers']);
                 }
             });
         });

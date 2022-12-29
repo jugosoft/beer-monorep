@@ -20,7 +20,7 @@ export class ApiBeersService implements IBeerService {
     updateBeer(beerToUpdate: IBeer): Observable<IBeer> {
         throw new Error('Method not implemented.');
     }
-    deleteBeer(beerId: Guid): Observable<number | undefined> {
+    deleteBeer(beerId: Guid): Observable<Guid | undefined> {
         throw new Error('Method not implemented.');
     }
 }

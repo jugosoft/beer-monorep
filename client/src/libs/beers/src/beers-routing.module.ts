@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { AuthGuard } from 'src/libs/auth/src/auth.guard';
-import { PostDetailsComponent } from './post-details/post-details.component';
-import { PostsComponent } from './posts.component';
+import { BeerDetailsComponent } from './beer-details/beer-details.component';
+import { BeersComponent } from './beers.component';
+
 
 const routes: Routes = [{
     path: '',
-    component: PostsComponent,
+    component: BeersComponent,
 }, {
-    path: ':id', canActivate: [AuthGuard], component: PostDetailsComponent
+    path: ':id', canActivate: [AuthGuard], component: BeerDetailsComponent
 }, {
     path: '**', redirectTo: '/'
 }];
@@ -17,4 +19,4 @@ const routes: Routes = [{
     imports: [RouterModule.forChild(routes)],
     exports: [RouterModule],
 })
-export class PostsRoutingModule { }
+export class BeersRoutingModule { }

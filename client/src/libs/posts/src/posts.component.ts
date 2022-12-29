@@ -9,11 +9,9 @@ import { IBeer, IPost } from 'src/libs/interfaces';
 })
 export class PostsComponent implements OnInit {
     posts!: IPost[];
-    beers!: IBeer[];
 
     constructor(
-        private readonly apiPosts: ApiPostsService,
-        private readonly apiBeers: ApiBeersService
+        private readonly apiPosts: ApiPostsService
     ) { }
 
     ngOnInit(): void {}

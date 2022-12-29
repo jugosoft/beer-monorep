@@ -13,6 +13,9 @@ const routes: Routes = [{
     loadChildren: () => import('src/libs/admin/users').then(m => m.UsersModule),
     canActivate: [AuthGuard]
 }, {
+    path: 'beers',
+    loadChildren: () => import('src/libs/beers').then(m => m.BeersModule)
+}, {
     path: 'about',
     loadChildren: async () => (await import('./pages/about/about.module')).AboutModule
 }, {
