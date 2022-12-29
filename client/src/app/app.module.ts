@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { IconModule } from './components/icon/icon.module';
-import { NavComponent } from './components/nav.component';
+import { NavComponent } from './components/nav/nav.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { ApiModule } from 'src/libs/api';
