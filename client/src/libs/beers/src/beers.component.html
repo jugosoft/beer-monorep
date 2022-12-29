@@ -1,0 +1,8 @@
+<div class="alert alert-warning">
+    <h1>Пиво</h1>
+    <div class="card-group">
+        <span *ngFor="let beer of beers">
+            <app-beer *ngIf="beer.id"  [beerId]="beer.id"></app-beer>
+        </span>
+    </div>
+</div>

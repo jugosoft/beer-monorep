@@ -36,14 +36,9 @@ export class LoginComponent implements OnInit {
             email: this.formData.value?.email,
             password: this.formData.value?.password,
         };
-
-        console.log(`Login page: ${loginForm.email}`);
-        console.log(`Login page: ${loginForm.password}`);
-
         this.authService.localLogin(loginForm.email, loginForm.password).subscribe(data => {
-            console.log("Is Login Success: " + data);
             if (data) {
-                this.router.navigate(['/users']);
+                this.router.navigate(['/posts']);
             }
         });
     }

@@ -1,0 +1,8 @@
+<div class="card" style="width:300px;margin: 0px 15px;">
+    <img class="card-img-top" src="https://random.imagecdn.app/300/300" alt="Card image">
+    <div class="card-body">
+        <h4 class="card-title">{{beer.author}}</h4>
+        <p *ngIf="beer.steps?.length" class="card-text">Число шагов приготовления {{beer.steps?.length}}</p>
+        <button (click)="gotoBeerDetails(beer.id)" class="btn btn-primary">Подбробнее</button>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="row" *ngIf="users$ | async as users">
+    <div class="col-sm-6">
+        <div class="list-group mb-2">
+            <button (click)="isNewTrigger()" class="btn btn-outline-primary">
+                <app-icon icon="bi bi-plus"></app-icon>
+                Add User
+            </button>
+        </div>
+
+        <div class="list-group">
+            <a *ngFor="let user of users" class="list-group-item list-group-item-action" [routerLink]="['/users', user.id?.toString()]">
+                {{ user.name }}
+            </a>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <ng-container *ngIf="!isNew">
+            <router-outlet></router-outlet>
+        </ng-container>
+        <ng-container *ngIf="isNew">
+            <app-user-form (onSubmit)="submitUser($any($event))"></app-user-form>
+        </ng-container>
+    </div>
+</div>
