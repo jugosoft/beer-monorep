@@ -7,5 +7,5 @@ export interface IBeerService {
     getBeers(): Observable<IBeer[]>;
     addBeer(newBeer: IBeer): Observable<IBeer>;
     updateBeer(beerToUpdate: IBeer): Observable<IBeer>;
-    deleteBeer(beerId: Guid): Observable<number | undefined>;
+    deleteBeer(beerId: Guid): Observable<Guid | undefined>;
 }

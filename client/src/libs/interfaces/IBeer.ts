@@ -6,22 +6,25 @@ export interface IBeerSteps {
     name: string;
     details: string;
     comment: string;
-    imageUrl: string;
+    image: string;
 }
 
 export interface IBeer {
-    id: Guid;
+    id?: Guid;
     author: Guid;
+    image?: string,
     title: string;
-    authorsNote: string;
+    authorsNote?: string;
+    colour: string;
+    type: string;
     alcohol: number;
-    bitterness: number;
-    originalGravity: number;
-    finalGravity: number;
-    colourSRM: number;
-    colourEBC: number;
-    barrelAged: number;
-    steps: IBeerSteps[];
+    bitterness?: number;
+    originalGravity?: number;
+    finalGravity?: number;
+    colourSRM?: number;
+    colourEBC?: number;
+    barrelAged?: number;
+    steps?: IBeerSteps[];
     createdAt: Date;
     updatedAt: Date;
 }
