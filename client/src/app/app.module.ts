@@ -10,6 +10,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { ApiModule } from 'src/libs/api';
+import { FooterComponent } from './components/footer/footer.component';
 
 export function tokenGetter(): string | null {
 	return localStorage.getItem('ACCESS_TOKEN_KEY');
@@ -19,6 +20,7 @@ export function tokenGetter(): string | null {
 	declarations: [
 		AppComponent,
 		NavComponent,
+		FooterComponent
 	],
 	imports: [
 		BrowserModule,
