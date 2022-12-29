@@ -9,8 +9,9 @@ import { BeersComponent } from './beers.component';
 const routes: Routes = [{
     path: '',
     component: BeersComponent,
+    canActivate: [AuthGuard]
 }, {
-    path: ':id', canActivate: [AuthGuard], component: BeerDetailsComponent
+    path: ':id', component: BeerDetailsComponent
 }, {
     path: '**', redirectTo: '/'
 }];

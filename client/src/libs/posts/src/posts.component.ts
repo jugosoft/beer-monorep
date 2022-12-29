@@ -14,5 +14,7 @@ export class PostsComponent implements OnInit {
         private readonly apiPosts: ApiPostsService
     ) { }
 
-    ngOnInit(): void {}
+    ngOnInit(): void { 
+        this.apiPosts.getPosts().subscribe(posts => this.posts = posts);
+    }
 }
