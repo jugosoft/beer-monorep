@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ILogin } from 'src/app/interfaces/ILogin';
 
 @Component({
@@ -13,11 +13,12 @@ import { ILogin } from 'src/app/interfaces/ILogin';
 })
 export class LoginComponent implements OnInit {
     public formData!: FormGroup;
-    public redirectUrl!: string;
+    public returnUrl!: string;
 
     constructor(
-        private authService: AuthService,
-        private router: Router
+        private readonly authService: AuthService,
+        private readonly router: Router,
+        private readonly activatedRoute: ActivatedRoute
     ) { }
 
     ngOnInit() {
@@ -37,7 +38,17 @@ export class LoginComponent implements OnInit {
             password: this.formData.value?.password,
         };
         this.authService.localLogin(loginForm.email, loginForm.password).subscribe(data => {
-            if (data) {
+            if (!data) {
+                throw new Error('Login Error happened');
+            }
+
+            this.activatedRoute.queryParams.subscribe(params => {
+                this.returnUrl = params['returnUrl'];
+            });
+
+            if (this.returnUrl) {
+                this.router.navigate([this.returnUrl])
+            } else {
                 this.router.navigate(['/posts']);
             }
         });
