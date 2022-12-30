@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IRegister } from 'src/app/interfaces';
 
 @Component({
@@ -13,11 +13,12 @@ import { IRegister } from 'src/app/interfaces';
 })
 export class RegisterComponent implements OnInit {
     public formData!: FormGroup;
-    public redirectUrl!: string;
+    public returnUrl!: string;
 
     constructor(
         private authService: AuthService,
-        private router: Router
+        private router: Router,
+        private readonly route: ActivatedRoute
     ) { }
 
     ngOnInit() {
@@ -45,9 +46,18 @@ export class RegisterComponent implements OnInit {
         console.log(`Register page: ${registerForm.password}`);
 
         this.authService.localRegister(registerForm.email, registerForm.username, registerForm.password).subscribe(data => {
-            console.log("Is Register Successed: " + data);
-            if (data) {
-                this.router.navigate(['/main']);
+            if (!data) {
+                throw new Error('Registration is failed');
+            }
+
+            this.route.queryParams.subscribe(params => {
+                this.returnUrl = params['returnUrl'];
+            });
+
+            if (this.returnUrl) {
+                this.router.navigate([this.returnUrl])
+            } else {
+                this.router.navigate(['/posts']);
             }
         });
     }

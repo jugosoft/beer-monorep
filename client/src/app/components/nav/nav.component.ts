@@ -22,7 +22,7 @@ export class NavComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.authService.isUserLoggedIn.subscribe(value => {
+        this.authService.user.subscribe(value => {
             if (value) {
                 this.menu[2] = { id: 4, title: 'Выйти', href: '/auth/logout', icon: 'bi bi-sign-turn-left' };
             } else {

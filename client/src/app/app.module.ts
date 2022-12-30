@@ -11,6 +11,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { ApiModule } from 'src/libs/api';
 import { FooterComponent } from './components/footer/footer.component';
+import { JwtInterceptor } from 'src/libs/auth/src/jwt.interceptor';
 
 export function tokenGetter(): string | null {
 	return localStorage.getItem('ACCESS_TOKEN_KEY');
@@ -36,7 +37,8 @@ export function tokenGetter(): string | null {
 		})
 	],
 	providers: [
-		...environment.providers
+		...environment.providers,
+		JwtInterceptor
 	],
 	bootstrap: [AppComponent]
 })
