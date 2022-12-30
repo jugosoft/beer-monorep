@@ -13,12 +13,15 @@ export class ApiBeersService implements IBeerService {
     getBeers(): Observable<IBeer[]> {
         throw new Error('Method not implemented.');
     }
+    
     addBeer(newBeer: IBeer): Observable<IBeer> {
         throw new Error('Method not implemented.');
     }
+
     updateBeer(beerToUpdate: IBeer): Observable<IBeer> {
         throw new Error('Method not implemented.');
     }
+
     deleteBeer(beerId: Guid): Observable<Guid | undefined> {
         throw new Error('Method not implemented.');
     }

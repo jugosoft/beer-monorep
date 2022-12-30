@@ -1,86 +1,45 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Guid } from 'guid-typescript';
-import { BehaviorSubject, Observable, of } from 'rxjs';
-import { tap, delay } from 'rxjs/operators';
-import { ApiUsersService } from 'src/libs/api';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { IUser } from 'src/libs/interfaces';
+import { Roles } from './roles';
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
-    user!: IUser;
-    userLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject(false);
+    user!: Observable<IUser>;
+    userSubject!: BehaviorSubject<IUser>;
 
-    constructor(
-        private readonly usersService: ApiUsersService,
-        private readonly router: Router
-    ) {
-        const localStorageToken = localStorage.getItem('isUserLoggedIn');
-        if (!localStorageToken) {
-            return;
-        }
-        const isUserLoggedIn = localStorageToken === 'true' ? true : false;
-        this.userLoggedIn.next(isUserLoggedIn);
+    constructor() {
+        const storedUser = localStorage.getItem('currentUser');
+        if (storedUser) {
+            const localStorageUser = JSON.parse(storedUser) as IUser;
+            this.userSubject.next(localStorageUser);
+        } 
     }
 
-    get isUserLoggedIn(): Observable<boolean> {
-        return this.userLoggedIn.asObservable();
+    public get userValue(): IUser {
+        return this.userSubject.value;
+    }
+
+    get isAdmin(): boolean {
+        return this.userSubject?.value.role === Roles.Admin;
+    }
+
+    get isClient(): boolean {
+        return this.userSubject?.value.role === Roles.Client;
     }
 
     localLogin(email: string, password: string): Observable<boolean> {
-        this.usersService.getUserByEmail(email).subscribe(user => {
-            this.user = user;
-        });
-
-        if (this.user.email === email &&
-            this.user.password === password) {
-            this.userLoggedIn.next(true);
-            this.isUserLoggedIn.subscribe(value => {
-                localStorage.setItem('isUserLoggedIn', value.toString());
-            });
-        }
-
-        this.router.navigate(['/posts']);
-
-        return this.isUserLoggedIn.pipe(
-            delay(500)
-        );
+        throw new Error('Method not implemented.');
     }
 
     localRegister(email: string, username: string, password: string): Observable<boolean> {
-        if (!email || !username || !password) {
-            return of(false);
-        }
-  
-        this.usersService.addUser({
-            email: email,
-            name: username,
-            password: password,
-            hashedRT: '',
-            createdAt: new Date(),
-            updatedAt: new Date(),
-        }).subscribe(newUser => {
-            if (newUser) {
-                this.userLoggedIn.next(true);
-                this.router.navigate(['/posts']);
-            }
-        });
-
-        this.isUserLoggedIn.subscribe(value => {
-            localStorage.setItem('isUserLoggedIn', value.toString());
-        });
-
-        return this.userLoggedIn.pipe(
-            delay(3000)
-        );
+        throw new Error('Method not implemented.');
     }
 
     logout(): void {
-        this.userLoggedIn.next(false);
-        this.router.navigate(['/posts']);
-        localStorage.removeItem('isUserLoggedIn');
+        throw new Error('Method not implemented.');
     }
 }

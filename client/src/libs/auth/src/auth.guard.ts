@@ -10,23 +10,30 @@ import { AuthService } from './auth.service';
 export class AuthGuard implements CanActivate {
 
     constructor(
-        // private authService: AuthService, 
+        private authService: AuthService,
         private router: Router
     ) { }
 
     canActivate(
-        next: ActivatedRouteSnapshot,
+        route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): boolean {
-        console.log(`Url: ${state.url}`)
+        const user = this.authService.userValue;
 
-        let isLoggedIn: string | null = localStorage.getItem('isUserLoggedIn');
-
-        if (isLoggedIn) {
-            return true;
+        // not logged in so redirect to login page with the return url
+        if (!user) {
+            this.router.navigate(['/auth', { queryParams: { returnUrl: state.url } }]);
+            return false;
         }
 
-        this.router.navigate(['/auth', 'login']);
-        return false;
+        // check if route is restricted by role
+        if (route.data['roles'] && route.data['roles'].indexOf(user.role) === -1) {
+            // role not authorised so redirect to home page
+            this.router.navigate(['/posts']);
+            return false;
+        }
+
+        // all checks passed
+        return true;
     }
 }

@@ -1,11 +1,16 @@
-import { 
-    ApiPostsService, 
-    MockApiPostsService, 
+import {
+    ApiPostsService,
+    MockApiPostsService,
     ApiUsersService,
     MockApiUsersService,
     ApiBeersService,
     MockApiBeersService
 } from 'src/libs/api';
+
+import {
+    AuthService,
+    MockAuthService
+} from 'src/libs/auth';
 
 export const environment = {
     production: false,
@@ -17,5 +22,7 @@ export const environment = {
         provide: ApiUsersService, useClass: MockApiUsersService
     }, {
         provide: ApiBeersService, useClass: MockApiBeersService
+    }, {
+        provide: AuthService, useClass: MockAuthService
     }],
 };
