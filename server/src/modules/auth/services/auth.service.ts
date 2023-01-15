@@ -75,7 +75,6 @@ export class AuthService {
         }
 
         const refreshTokenMatches = await argon2.verify(user.hashedRT, refreshToken);
-
         if (!refreshTokenMatches) {
             throw new ForbiddenException('Access Denied');
         }

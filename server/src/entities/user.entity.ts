@@ -1,34 +1,40 @@
-import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { 
+    Column, 
+    CreateDateColumn, 
+    Entity, 
+    JoinTable, 
+    ManyToMany, 
+    PrimaryGeneratedColumn, 
+    UpdateDateColumn 
+} from 'typeorm';
 
-@ObjectType()
+import { RoleEntity } from './role.entity';
+
+
 @Entity('users')
 export class UserEntity {
-  @Field(() => ID)
-  @PrimaryGeneratedColumn()
-  id: number;
+    @PrimaryGeneratedColumn()
+    id: number;
 
-  @Field()
-  @CreateDateColumn()
-  createdAt: Date;
+    @CreateDateColumn()
+    createdAt: Date;
 
-  @Field()
-  @UpdateDateColumn()
-  updatedAt: Date;
+    @UpdateDateColumn()
+    updatedAt: Date;
 
-  @Field()
-  @Column({ unique: true })
-  email: string;
+    @Column({ unique: true })
+    email: string;
 
-  @Field()
-  @Column({ unique: true })
-  name: string;
+    @ManyToMany(() => RoleEntity)
+    @JoinTable()
+    roles: RoleEntity[];
 
-  @Field()
-  @Column()
-  password: string;
+    @Column({ unique: true })
+    name: string;
 
-  @Field({nullable: true})
-  @Column({nullable: true})
-  hashedRT: string;
+    @Column()
+    password: string;
+
+    @Column({ nullable: true })
+    hashedRT: string;
 }
