@@ -26,13 +26,13 @@ export class AuthService {
         }
 
         const passwordMatch = await argon2.verify(user.password, authLoginInput.password);
-    
+
         if (!passwordMatch) {
             throw new BadRequestException('Access Denied. Try again!');
         }
 
         const tokens = await this.getTokens(user.id, user.name);
-        
+
         await this.updateRtHash(user.id, tokens.refreshToken);
 
         return tokens;
@@ -43,6 +43,7 @@ export class AuthService {
         if (userExists) {
             throw new BadRequestException('User already exists');
         }
+
         // Hash password
         const hash = await this.hashData(createUserInput.password);
         const newUser = await this.usersService.createUser({
@@ -69,15 +70,18 @@ export class AuthService {
 
     async refreshTokens(userId: number, refreshToken: string): Promise<Tokens> {
         const user = await this.usersService.getOneUser(userId);
-
-        if (!user || !user.hashedRT) throw new ForbiddenException('Access Denied. Try again!');
-
-        if (!this.cryptoService.verify(refreshToken, user.hashedRT)) {
-            throw new ForbiddenException('Access Denied. Try again!');
+        if (!user || !user.hashedRT) {
+            throw new ForbiddenException('Access Denied');
         }
 
-        const tokens = await this.getTokens(user.id, user.name);
-        await this.updateRtHash(user.id, tokens.refreshToken);
+        const refreshTokenMatches = await argon2.verify(user.hashedRT, refreshToken);
+
+        if (!refreshTokenMatches) {
+            throw new ForbiddenException('Access Denied');
+        }
+
+        const tokens = await this.getTokens(userId, user.name);
+        await this.updateRtHash(userId, tokens.refreshToken);
         return tokens;
     }
 
@@ -111,7 +115,7 @@ export class AuthService {
         };
     }
 
-    hashData(data: string) {
+    hashData(data: string): Promise<string> {
         return argon2.hash(data);
     }
 }

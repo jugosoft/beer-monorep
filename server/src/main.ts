@@ -6,21 +6,18 @@ import { AppModule } from './app.module';
 import { AtGuard } from './modules/auth/guards';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  
-  // app.enableCors({
-  //   origin: true,
-  //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
-  //   credentials: true,
-  // });
+    const app = await NestFactory.create(AppModule);
 
-  const config = app.get(ConfigService);
-  const PORT = config.getOrThrow<number>(environment.port);
-  
-  const reflector: Reflector = new Reflector();
-  // app.useGlobalGuards(new AtGuard(reflector));
+    // app.enableCors({
+    //   origin: true,
+    //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    //   credentials: true,
+    // });
 
-  await app.listen(PORT);
+    const config = app.get(ConfigService);
+    const PORT = config.getOrThrow<number>(environment.port);
+
+    await app.listen(PORT);
 }
 
 bootstrap();
