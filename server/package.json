@@ -19,7 +19,12 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "typeorm": "typeorm-ts-node-commonjs"
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli -d src/ormconfig.ts",
+    "db:drop": "npm run typeorm schema:drop",
+    "migration:create": "cross-var ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli migration:create ./src/migrations/$npm_config_name",
+    "migration:generate": "cross-var npm run typeorm -- migration:generate ./src/migrations/$npm_config_name",
+    "migration:run": "npm run build && npm run typeorm -- migration:run",
+    "migration:revert": "npm run typeorm -- migration:revert"
   },
   "dependencies": {
     "@nestjs/apollo": "^10.0.19",
@@ -33,8 +38,11 @@
     "argon2": "^0.30.3",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2",
     "concurrently": "^7.0.0",
     "cors": "^2.8.5",
+    "cross-var": "^1.1.0",
     "graphql": "^15.8.0",
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
@@ -56,6 +64,7 @@
     "@types/passport-jwt": "^3.0.8",
     "@types/passport-local": "^1.0.34",
     "@types/supertest": "^2.0.11",
+    "@types/validator": "^13.7.10",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
     "eslint": "^8.20.0",

@@ -1,9 +1,9 @@
-import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 
-import { GetCurrentUserId, GetCurrentUser, Public } from 'src/common';
-import { CreateUserInput } from '../../../modules/users/inputs/create-user.input';
+import { GetCurrentUserId, GetCurrentUser } from 'src/common';
 import { AtGuard, RtGuard } from '../guards';
 import { AuthLoginInput } from '../inputs/auth-login.input';
+import { AuthRegisterInput } from '../inputs/auth-register.input';
 import { AuthService } from '../services/auth.service';
 import { Tokens } from '../types';
 
@@ -18,8 +18,9 @@ export class AuthController {
     }
 
     @Post('local/register')
+    @UsePipes(new ValidationPipe())
     @HttpCode(HttpStatus.CREATED)
-    async registerLocal(@Body() authRegisterInput: CreateUserInput): Promise<Tokens> {
+    async registerLocal(@Body() authRegisterInput: AuthRegisterInput): Promise<Tokens> {
         return this.authService.registerLocal(authRegisterInput);
     }
 

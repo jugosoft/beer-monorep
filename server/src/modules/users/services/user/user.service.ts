@@ -11,7 +11,7 @@ import { UpdateUserRtInput } from '../../inputs/update-user-rt.input';
 export class UserService {
     constructor(
         @InjectRepository(UserEntity)
-        private readonly userRepository: Repository<UserEntity>,
+        private readonly userRepository: Repository<UserEntity>
     ) { }
 
     async createUser(createUserInput: CreateUserInput): Promise<UserEntity> {
@@ -20,6 +20,10 @@ export class UserService {
 
     async getOneUser(id: number): Promise<UserEntity> | null {
         return await this.userRepository.findOne({ where: { id: id } });
+    }
+
+    async getOneUserByEmail(email: string): Promise<UserEntity> | null {
+        return await this.userRepository.findOne({ where: { email: email } });
     }
 
     async getOneUserByName(name: string): Promise<UserEntity> | null {
