@@ -15,7 +15,7 @@ export const AppDataSource = new DataSource({
     database: configService.get('TYPEORM_DATABASE'),
     entities: [__dirname + '/**/entities/*{.ts,.js}', RoleEntity],
     logging: true,
-    synchronize: true,
+    synchronize: false,
     migrationsRun: false,
     migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
     migrationsTableName: 'history'
