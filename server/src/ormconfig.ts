@@ -8,11 +8,11 @@ const configService = new ConfigService();
 
 export const AppDataSource = new DataSource({
     type: 'postgres',
-    host: 'localhost',
-    port: 5432,
-    username: 'postgres',
-    password: '123456',
-    database: 'beer-app-db',
+    host: configService.get('TYPEORM_HOST'),
+    port: configService.get('TYPEORM_PORT') as number,
+    username: configService.get('TYPEORM_USERNAME'),
+    password: configService.get('TYPEORM_PASSWORD') || '123456',
+    database: configService.get('TYPEORM_DATABASE'),
     entities: [__dirname + '/**/entities/*{.ts,.js}', RoleEntity],
     logging: true,
     synchronize: false,
