@@ -1,22 +1,36 @@
 import { BadRequestException, ForbiddenException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import * as argon2 from 'argon2';
+import { AuthRegisterInput } from '../inputs';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
-import { CreateUserInput } from 'src/modules/users/inputs/create-user.input';
 import { UserService } from 'src/modules/users/services/user/user.service';
 import { Tokens } from '../types';
 import { AuthLoginInput } from '../inputs/auth-login.input';
+import { UserEntity } from 'src/entities';
 
-import * as argon2 from 'argon2';
 
 @Injectable()
 export class AuthService {
     constructor(
+        @InjectRepository(UserEntity)
+        private readonly userRepository: Repository<UserEntity>,
         private readonly usersService: UserService,
         private readonly jwtService: JwtService
     ) { }
 
     async loginLocal(authLoginInput: AuthLoginInput): Promise<Tokens> {
-        const user = await this.usersService.getOneUserByName(authLoginInput.name);
+        const user = await this.userRepository.findOne({ 
+            where: { 
+                name: authLoginInput.name 
+            }, 
+            select: [
+                'id', 
+                'name', 
+                'password'
+            ] 
+        });
 
         if (!user) {
             throw new BadRequestException('Access Denied. Try again!');
@@ -35,16 +49,18 @@ export class AuthService {
         return tokens;
     }
 
-    async registerLocal(createUserInput: CreateUserInput): Promise<Tokens> {
-        const userExists = await this.usersService.getOneUserByName(createUserInput.name);
-        if (userExists) {
+    async registerLocal(authRegisterInput: AuthRegisterInput): Promise<Tokens> {
+        const userByEmail = await this.usersService.getOneUserByEmail(authRegisterInput.email);
+        const userByName = await this.usersService.getOneUserByName(authRegisterInput.name);
+
+        if (userByEmail || userByName) {
             throw new BadRequestException('User already exists');
         }
-
+        
         // Hash password
-        const hash = await this.hashData(createUserInput.password);
+        const hash = await this.hashData(authRegisterInput.password);
         const newUser = await this.usersService.createUser({
-            ...createUserInput,
+            ...authRegisterInput,
             password: hash
         });
 
