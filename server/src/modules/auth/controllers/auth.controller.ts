@@ -1,6 +1,6 @@
 import { Body, Controller, HttpCode, HttpStatus, Post, UseGuards } from '@nestjs/common';
 
-import { GetCurrentUserId, GetCurrentUser, Public } from 'src/common';
+import { GetCurrentUserId, GetCurrentUser } from 'src/common';
 import { CreateUserInput } from '../../../modules/users/inputs/create-user.input';
 import { AtGuard, RtGuard } from '../guards';
 import { AuthLoginInput } from '../inputs/auth-login.input';

@@ -1,9 +1,6 @@
-import { NestFactory, Reflector } from '@nestjs/core';
-import { ConfigService } from '@nestjs/config';
+import { NestFactory } from '@nestjs/core';
 
-import { environment } from 'constants/environment';
 import { AppModule } from './app.module';
-import { AtGuard } from './modules/auth/guards';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
@@ -14,8 +11,7 @@ async function bootstrap() {
     //   credentials: true,
     // });
 
-    const config = app.get(ConfigService);
-    const PORT = config.getOrThrow<number>(environment.port);
+    const PORT: number = process.env.API_PORT as unknown as number || 3001;
 
     await app.listen(PORT);
 }

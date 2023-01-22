@@ -1,11 +1,9 @@
 import { BadRequestException, ForbiddenException, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 
 import { CreateUserInput } from 'src/modules/users/inputs/create-user.input';
 import { UserService } from 'src/modules/users/services/user/user.service';
 import { Tokens } from '../types';
-import { atSecret, rtSecret } from "constants/crypt";
 import { AuthLoginInput } from '../inputs/auth-login.input';
 
 import * as argon2 from 'argon2';
@@ -14,8 +12,7 @@ import * as argon2 from 'argon2';
 export class AuthService {
     constructor(
         private readonly usersService: UserService,
-        private readonly jwtService: JwtService,
-        private readonly config: ConfigService
+        private readonly jwtService: JwtService
     ) { }
 
     async loginLocal(authLoginInput: AuthLoginInput): Promise<Tokens> {
@@ -90,9 +87,9 @@ export class AuthService {
                 {
                     sub: userId,
                     username
-                },
+                }, 
                 {
-                    secret: this.config.get<string>(atSecret),
+                    secret: process.env.AT_SECRET,
                     expiresIn: '15m'
                 }
             ),
@@ -102,7 +99,7 @@ export class AuthService {
                     username
                 },
                 {
-                    secret: this.config.get<string>(rtSecret),
+                    secret: process.env.RT_SECRET,
                     expiresIn: '7d'
                 }
             )
