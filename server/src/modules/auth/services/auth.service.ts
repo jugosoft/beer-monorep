@@ -102,7 +102,7 @@ export class AuthService {
             this.jwtService.signAsync(
                 {
                     sub: userId,
-                    username
+                    username: username
                 }, 
                 {
                     secret: process.env.AT_SECRET,
@@ -112,7 +112,7 @@ export class AuthService {
             this.jwtService.signAsync(
                 {
                     sub: userId,
-                    username
+                    username: username
                 },
                 {
                     secret: process.env.RT_SECRET,
@@ -127,7 +127,7 @@ export class AuthService {
         };
     }
 
-    hashData(data: string): Promise<string> {
+    async hashData(data: string): Promise<string> {
         return argon2.hash(data);
     }
 }

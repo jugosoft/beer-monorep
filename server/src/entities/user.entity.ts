@@ -4,9 +4,11 @@ import {
     Entity, 
     JoinTable, 
     ManyToMany, 
+    OneToMany, 
     PrimaryGeneratedColumn, 
     UpdateDateColumn 
 } from 'typeorm';
+import { PostEntity } from './post.entity';
 
 import { RoleEntity } from './role.entity';
 
@@ -24,6 +26,9 @@ export class UserEntity {
 
     @Column({ unique: true })
     email: string;
+
+    @OneToMany(() => PostEntity, post => post.author)
+    posts: PostEntity[];
 
     @ManyToMany(() => RoleEntity)
     @JoinTable()

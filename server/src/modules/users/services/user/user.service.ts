@@ -7,6 +7,7 @@ import { CreateUserInput } from '../../inputs/create-user.input';
 import { UpdateUserInput } from '../../inputs/update-user.input';
 import { UpdateUserRtInput } from '../../inputs/update-user-rt.input';
 
+
 @Injectable()
 export class UserService {
     constructor(
@@ -19,7 +20,8 @@ export class UserService {
     }
 
     async getOneUser(id: number): Promise<UserEntity> | null {
-        return await this.userRepository.findOne({ where: { id: id } });
+        const user = await this.userRepository.findOne({ where: { id: id } });
+        return user;
     }
 
     async getOneUserByEmail(email: string): Promise<UserEntity> | null {

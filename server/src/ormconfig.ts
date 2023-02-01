@@ -16,7 +16,7 @@ export const AppDataSource = new DataSource({
     entities: [__dirname + '/**/entities/*{.ts,.js}', RoleEntity],
     logging: true,
     synchronize: false,
-    migrationsRun: false,
+    migrationsRun: true,
     migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
     migrationsTableName: 'history'
 });

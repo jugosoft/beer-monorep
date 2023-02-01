@@ -16,11 +16,20 @@ export class PostEntity {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @ManyToOne(() => UserEntity, (user) => user)
+    @Column()
+    slug: string;
+
+    @ManyToOne(() => UserEntity, user => user.posts)
     author: UserEntity
 
     @Column()
     title: string;
+
+    @Column() 
+    description: string;
+
+    @Column('simple-array')
+    tagList: string[];
 
     @OneToMany(() => PostAbstractEntity, abstract => abstract.post)
     abstracts: PostAbstractEntity[];
@@ -49,6 +58,12 @@ export class PostAbstractEntity {
 
     @Column()
     text: string;
+
+    @Column('simple-array')
+    tagList: string[];
+
+    @Column({default: 0})
+    favouritesCount: number;
 
     @ManyToOne(() => PostEntity, post => post.abstracts)
     post: PostEntity;
