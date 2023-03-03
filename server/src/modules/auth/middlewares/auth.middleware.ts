@@ -23,7 +23,7 @@ export class AuthMiddleware implements NestMiddleware {
             const decoded = verify(token, process.env.AT_SECRET);
             const userId = decoded.sub as unknown as number;
             const user = await this.userService.getOneUser(userId);
-            req.user = user;
+            req.currentUser = user;
             next();
         } catch (error) {
             req.user = null;

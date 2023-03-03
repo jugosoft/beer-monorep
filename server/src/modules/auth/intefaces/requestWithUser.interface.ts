@@ -4,5 +4,5 @@ import { UserEntity } from 'src/entities';
 
 
 export interface RequestWithUser extends Request {
-    user: UserEntity;
+    currentUser: UserEntity;
 }

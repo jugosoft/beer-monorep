@@ -40,6 +40,6 @@ export class UserEntity {
     @Column({select: false})
     password: string;
 
-    @Column({ nullable: true })
+    @Column({ nullable: true, select: false })
     hashedRT: string;
 }
