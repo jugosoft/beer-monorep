@@ -37,4 +37,12 @@ export class PostsController {
         const post = await this.postsService.getPostById(id);
         return this.postsService.buildResponse(post);
     }
+
+    @Get(':slug')
+    async getPostBySlug(
+        @Param() slug: string
+    ): Promise<IPostResponse> {
+        const post = await this.postsService.getPostBySlug(slug);
+        return this.postsService.buildResponse(post);
+    }
 }

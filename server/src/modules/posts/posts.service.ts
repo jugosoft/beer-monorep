@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import slugify from 'slugify';
-import { UserEntity } from 'src/entities';
 
-import { PostEntity } from 'src/entities/post.entity';
+import { UserEntity, PostEntity } from 'src/entities';
 import { Repository } from 'typeorm';
 import { CreatePostInput } from './inputs';
 import { IPostResponse } from './types';
@@ -40,6 +39,13 @@ export class PostsService {
         });
     }
 
+    async getPostBySlug(
+        slug: string
+    ): Promise<PostEntity> {
+        return await this.postRepository.findOne({
+            where: { slug }
+        });
+    }
     async getPosts(): Promise<PostEntity[]> {
         const posts = await this.postRepository.find({take: 20});
         return posts;
