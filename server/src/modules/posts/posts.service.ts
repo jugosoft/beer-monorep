@@ -35,7 +35,7 @@ export class PostsService {
         id: number
     ): Promise<PostEntity> {
         return await this.postRepository.findOne({
-            where: { id }
+            where: { id: id }
         });
     }
 

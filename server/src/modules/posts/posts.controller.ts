@@ -30,17 +30,9 @@ export class PostsController {
         return posts.map(post => this.postsService.buildResponse(post));
     }
 
-    @Get(':id')
-    async getPostById(
-        @Param() id: number
-    ): Promise<IPostResponse> {
-        const post = await this.postsService.getPostById(id);
-        return this.postsService.buildResponse(post);
-    }
-
     @Get(':slug')
     async getPostBySlug(
-        @Param() slug: string
+        @Param('slug') slug: string
     ): Promise<IPostResponse> {
         const post = await this.postsService.getPostBySlug(slug);
         return this.postsService.buildResponse(post);
