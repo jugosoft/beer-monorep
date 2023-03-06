@@ -19,7 +19,7 @@ export class PostEntity {
     @Column()
     slug: string;
 
-    @ManyToOne(() => UserEntity, user => user.posts)
+    @ManyToOne(() => UserEntity, user => user.posts, { eager: true })
     author: UserEntity
 
     @Column()
