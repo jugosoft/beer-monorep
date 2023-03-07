@@ -1,4 +1,5 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, UsePipes } from '@nestjs/common';
+import { ValidationPipe } from '@nestjs/common/pipes';
 
 import { GetCurrentUser, GetCurrentUserId } from 'src/common';
 import { UserEntity } from 'src/entities';
@@ -16,6 +17,7 @@ export class PostsController {
 
     @Post()
     @UseGuards(AtGuard)
+    @UsePipes(new ValidationPipe())
     async createPost(
         @GetCurrentUser() currentUser: UserEntity,
         @Body() createPostInput: CreatePostInput
@@ -50,6 +52,7 @@ export class PostsController {
 
     @Put(':slug')
     @UseGuards(AtGuard)
+    @UsePipes(new ValidationPipe())
     async updatePost(
         @Param('slug') slug: string,
         @Body() updatePostInput: UpdatePostInput,
