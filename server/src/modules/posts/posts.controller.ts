@@ -1,9 +1,9 @@
-import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
 
 import { GetCurrentUser, GetCurrentUserId } from 'src/common';
 import { UserEntity } from 'src/entities';
 import { AtGuard } from '../auth';
-import { CreatePostInput } from './inputs';
+import { CreatePostInput, UpdatePostInput } from './inputs';
 import { PostsService } from './posts.service';
 import { IPostResponse } from './types';
 
@@ -43,7 +43,19 @@ export class PostsController {
     async deletePost(
         @Param('slug') slug: string,
         @GetCurrentUserId() currentUserId: number
-    ): Promise<any> {
-        return await this.postsService.delete(slug, currentUserId);
+    ): Promise<boolean> {
+        const result = await this.postsService.delete(slug, currentUserId);
+        return result.affected === 1;
+    }
+
+    @Put(':slug')
+    @UseGuards(AtGuard)
+    async updatePost(
+        @Param('slug') slug: string,
+        @Body() updatePostInput: UpdatePostInput,
+        @GetCurrentUserId() currentUserId: number
+    ): Promise<IPostResponse> {
+        const updatedPost = await this.postsService.update(slug, updatePostInput, currentUserId);
+        return this.postsService.buildResponse(updatedPost);
     }
 }

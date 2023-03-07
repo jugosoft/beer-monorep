@@ -4,8 +4,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import slugify from 'slugify';
 
 import { UserEntity, PostEntity } from 'src/entities';
-import { DeleteResult, Repository } from 'typeorm';
-import { CreatePostInput } from './inputs';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { CreatePostInput, UpdatePostInput } from './inputs';
 import { IPostResponse } from './types';
 
 
@@ -46,6 +46,29 @@ export class PostsService {
         }
 
         return await this.postRepository.delete({ slug });
+    }
+
+    public async update(
+        slug: string,
+        updatePostInput: UpdatePostInput,
+        userId: number
+    ): Promise<PostEntity> {
+        if (!slug) {
+            throw new HttpException('Empty slug', HttpStatus.NOT_FOUND);
+        }
+
+        const post = await this.getPostBySlug(slug);
+        if (!post) {
+            throw new HttpException('Post doesnt exist', HttpStatus.NOT_FOUND);
+        }
+
+        if (post.author.id !== userId) {
+            throw new HttpException('Current user is not the author', HttpStatus.FORBIDDEN);
+        }
+
+        Object.assign(post, updatePostInput);
+
+        return await this.postRepository.save(post);
     }
 
     async getPostById(
