@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, UsePipes } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards, UsePipes } from '@nestjs/common';
 import { ValidationPipe } from '@nestjs/common/pipes';
 
 import { GetCurrentUser, GetCurrentUserId } from 'src/common';
@@ -6,14 +6,29 @@ import { UserEntity } from 'src/entities';
 import { AtGuard } from '../auth';
 import { CreatePostInput, UpdatePostInput } from './inputs';
 import { PostsService } from './posts.service';
-import { IPostResponse } from './types';
+import { IPostResponse, IPostsResponse } from './types';
 
+export interface IPostsGetListQueryParams {
+    limit: number;
+    offset: number;
+    tag: string;
+    author: string;
+    favorited: boolean;
+}
 
 @Controller('posts')
 export class PostsController {
     constructor(
         private readonly postsService: PostsService
     ) { }
+
+    @Get()
+    async getPosts(
+        @GetCurrentUserId() currentUserId: number,
+        @Query() queryParams: IPostsGetListQueryParams
+    ): Promise<IPostsResponse> {
+        return await this.postsService.getPosts(currentUserId, queryParams);
+    }
 
     @Post()
     @UseGuards(AtGuard)
@@ -24,12 +39,6 @@ export class PostsController {
     ): Promise<IPostResponse> {
         const post = await this.postsService.create(currentUser, createPostInput);
         return this.postsService.buildResponse(post);
-    }
-
-    @Get()
-    async getPosts(): Promise<IPostResponse[]> {
-        const posts = await this.postsService.getPosts();
-        return posts.map(post => this.postsService.buildResponse(post));
     }
 
     @Get(':slug')

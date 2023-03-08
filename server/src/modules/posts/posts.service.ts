@@ -4,16 +4,20 @@ import { InjectRepository } from '@nestjs/typeorm';
 import slugify from 'slugify';
 
 import { UserEntity, PostEntity } from 'src/entities';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { AppDataSource } from 'src/ormconfig';
+import { DeleteResult, Repository } from 'typeorm';
 import { CreatePostInput, UpdatePostInput } from './inputs';
-import { IPostResponse } from './types';
+import { IPostsGetListQueryParams } from './posts.controller';
+import { IPostResponse, IPostsResponse } from './types';
 
 
 @Injectable()
 export class PostsService {
     constructor(
         @InjectRepository(PostEntity)
-        private readonly postRepository: Repository<PostEntity>
+        private readonly postRepository: Repository<PostEntity>,
+        @InjectRepository(UserEntity)
+        private readonly userRepository: Repository<UserEntity>
     ) { }
 
     async create(
@@ -86,9 +90,46 @@ export class PostsService {
             where: { slug }
         });
     }
-    async getPosts(): Promise<PostEntity[]> {
-        const posts = await this.postRepository.find({take: 20});
-        return posts;
+
+    async getPosts(
+        currentUserId: number,
+        query: IPostsGetListQueryParams
+    ): Promise<IPostsResponse> {
+        const queryBuilder = AppDataSource.getRepository(PostEntity)
+            .createQueryBuilder('posts')
+            .leftJoinAndSelect('posts.author', 'author')
+            .orderBy('posts.createdAt', 'DESC');
+
+        const postsCount = await queryBuilder.getCount();
+
+        if (query.tag) {
+            queryBuilder.andWhere('posts.tagList LIKE :tag', {
+                tag: `%${query.tag}%`
+            });
+        }
+
+        if (query.author) {
+            const author = await this.userRepository.findOne({
+                where: {
+                    name: query.author
+                }
+            });
+            queryBuilder.andWhere('posts.authorId = :id', {
+                id: author.id
+            });
+        }
+
+        if (query.limit) {
+            queryBuilder.limit(query.limit);
+        }
+
+        if (query.offset) {
+            queryBuilder.offset(query.offset);
+        }
+
+        const posts = await queryBuilder.getMany();
+
+        return { posts, postsCount };
     }
 
     buildResponse(post: PostEntity): IPostResponse {
@@ -100,6 +141,6 @@ export class PostsService {
     }
 
     getSlug(title): string {
-        return `${this.generateRandomPrefix()}-${slugify(title, {lower: true})}`;
+        return `${this.generateRandomPrefix()}-${slugify(title, { lower: true })}`;
     }
 }

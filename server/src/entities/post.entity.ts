@@ -28,6 +28,9 @@ export class PostEntity {
     @Column() 
     description: string;
 
+    @Column({default: 0}) 
+    favoritedCount: number;
+
     @Column('simple-array')
     tagList: string[];
 
@@ -46,9 +49,6 @@ export class PostEntity {
 export class PostAbstractEntity {
     @PrimaryGeneratedColumn()
     id: number;
-
-    @Column()
-    postId: number;
 
     @Column()
     order: number;
