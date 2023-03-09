@@ -1,14 +1,13 @@
 import { HttpStatus, Injectable } from '@nestjs/common';
 import { HttpException } from '@nestjs/common/exceptions';
 import { InjectRepository } from '@nestjs/typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 import slugify from 'slugify';
 
 import { UserEntity, PostEntity } from 'src/entities';
 import { AppDataSource } from 'src/ormconfig';
-import { DeleteResult, Repository } from 'typeorm';
 import { CreatePostInput, UpdatePostInput } from './inputs';
-import { IPostsGetListQueryParams } from './posts.controller';
-import { IPostResponse, IPostsResponse } from './types';
+import { IPostResponse, IPostsGetListQueryParams, IPostsResponse } from './types';
 
 
 @Injectable()
@@ -130,6 +129,35 @@ export class PostsService {
         const posts = await queryBuilder.getMany();
 
         return { posts, postsCount };
+    }
+
+    async addPostToFavorites(
+        slug: string,
+        userId: number
+    ): Promise<PostEntity> {
+        const post = await this.postRepository.findOne({ where: { slug } });
+        if (!post) {
+            throw new HttpException('Post doesnt exists', HttpStatus.NOT_FOUND);
+        }
+
+        const user = await this.userRepository.findOne({
+            where: {
+                id: userId
+            }, relations: ['favorites']
+        });
+        if (!user) {
+            throw new HttpException('User doesnt exists', HttpStatus.NOT_FOUND);
+        }
+        
+        const isNotFavorited = user.favorites.findIndex(postInFavorites => postInFavorites.id === post.id) === -1;
+        if (isNotFavorited) {
+            user.favorites.push(post);
+            post.favoritedCount += 1;
+            await this.postRepository.save(post);
+            await this.userRepository.save(user);
+        }
+
+        return post;
     }
 
     buildResponse(post: PostEntity): IPostResponse {

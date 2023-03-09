@@ -6,15 +6,8 @@ import { UserEntity } from 'src/entities';
 import { AtGuard } from '../auth';
 import { CreatePostInput, UpdatePostInput } from './inputs';
 import { PostsService } from './posts.service';
-import { IPostResponse, IPostsResponse } from './types';
+import { IPostResponse, IPostsGetListQueryParams, IPostsResponse } from './types';
 
-export interface IPostsGetListQueryParams {
-    limit: number;
-    offset: number;
-    tag: string;
-    author: string;
-    favorited: boolean;
-}
 
 @Controller('posts')
 export class PostsController {
@@ -69,5 +62,15 @@ export class PostsController {
     ): Promise<IPostResponse> {
         const updatedPost = await this.postsService.update(slug, updatePostInput, currentUserId);
         return this.postsService.buildResponse(updatedPost);
+    }
+
+    @Post(':slug/favorite')
+    @UseGuards(AtGuard)
+    async addPostToFavorites(
+        @Param('slug') slug,
+        @GetCurrentUserId() currentUserId: number
+    ): Promise<IPostResponse> {
+        const post = await this.postsService.addPostToFavorites(slug, currentUserId);
+        return this.postsService.buildResponse(post);
     }
 }

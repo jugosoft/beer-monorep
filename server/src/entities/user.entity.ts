@@ -30,6 +30,10 @@ export class UserEntity {
     @OneToMany(() => PostEntity, post => post.author)
     posts: PostEntity[];
 
+    @ManyToMany(() => PostEntity)
+    @JoinTable()
+    favorites: PostEntity[];
+
     @ManyToMany(() => RoleEntity)
     @JoinTable()
     roles: RoleEntity[];

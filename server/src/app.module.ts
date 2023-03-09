@@ -9,18 +9,13 @@ import { AppDataSource } from './ormconfig';
 import { PostsModule } from './modules/posts/posts.module';
 import { AuthMiddleware } from './modules/auth/middlewares';
 
+
 @Module({
     imports: [
         ConfigModule.forRoot({
             isGlobal: true,
             envFilePath: '.env'
         }),
-        // GraphQLModule.forRoot({
-        //     autoSchemaFile: 'schema.gql',
-        //     sortSchema: true,
-        //     playground: true,
-        //     driver: ApolloDriver
-        // }),
         TypeOrmModule.forRoot(AppDataSource.options),
         UsersModule,
         BeersModule,
